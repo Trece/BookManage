@@ -1,0 +1,41 @@
+// Place all the styles related to the LibManage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header {
+    font-size:50px;
+    margin:auto;
+    color:pink;
+}
+
+.book, .search_box {
+    margin:auto;
+    width:500px;
+    border-radius:15px;
+    padding:30px;
+}
+
+
+.book {
+    margin-top:10px;
+    background-color:lightblue;
+}
+
+.book_name {
+    font-size:30px;
+    color:red;
+}
+
+.search_box {
+    background-color:lightgreen;
+}
+input {
+    font-size:25px;
+}
+
+button {
+    background-color:lightgrey;
+    border-radius:5px;
+    padding:5px;
+    font-size:25px;
+}
