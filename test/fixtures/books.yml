@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  ISBN: MyString
+  description: MyText
+  total: 1
+  remain: 1
+
+two:
+  name: MyString
+  ISBN: MyString
+  description: MyText
+  total: 1
+  remain: 1
