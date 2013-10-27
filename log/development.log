@@ -1423,3 +1423,34 @@ Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2013-10-28 00:10:00 
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-28 00:10:00 +0800
+
+
+Started GET "/" for 127.0.0.1 at 2013-10-28 01:29:40 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LibManageController#home as HTML
+DEPRECATION WARNING: Calling #find(:all) is deprecated. Please call #all directly instead. (called from home at /Users/Tenut/Developer/ruby_code/BookManage/book_manage/app/controllers/lib_manage_controller.rb:3)
+DEPRECATION WARNING: Relation#all is deprecated. If you want to eager-load a relation, you can call #load (e.g. `Post.where(published: true).load`). If you want to get an array of records from a relation, you can call #to_a (e.g. `Post.where(published: true).to_a`). (called from home at /Users/Tenut/Developer/ruby_code/BookManage/book_manage/app/controllers/lib_manage_controller.rb:3)
+  [1m[35mBook Load (0.2ms)[0m  SELECT "books".* FROM "books"
+  Rendered lib_manage/home.html.erb within layouts/application (27.8ms)
+Completed 200 OK in 111ms (Views: 69.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/lib_manage.css?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/lib_manage.js?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-28 01:29:41 +0800
