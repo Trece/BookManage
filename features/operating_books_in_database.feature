@@ -5,8 +5,6 @@ Feature: operating books in database
   So that I can know the current state of books
   
 Scenario: add a new book into library
-  Given I am on the home page
-  When  I press "Add a New Book"
   
 Scenario: update basic book information
 

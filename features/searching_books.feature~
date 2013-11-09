@@ -1,0 +1,6 @@
+Feature: searching books
+  
+  As a admin of the system
+  I want to operate books in the database, including CRUD
+  So that I can know the current state of books
+  

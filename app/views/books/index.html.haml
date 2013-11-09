@@ -3,12 +3,12 @@
 %div.card
   %form.form-inline{role: "form", :method => :post, :action => search_books_path}
     %div.form-group{class: "col-md-2"}
-      %select.form-control{:name => :type}
+      %select.form-control{:name => :type, :id => "search_type"}
         - @all_field.each do |field|
-          %option= field
+          %option= field 
     %div.form-group{class: "col-md-8"}
-      %input{class: "form-control", type: "text", :name => :keywords}
-    %button{class: "btn btn-primary"} Search
+      %input{class: "form-control", type: "text", :name => :keywords, :id => "search_keywords"}
+    %button{class: "btn btn-primary", :id => "search_button"} Search
 
 - @books.each do |book|
   %div.card
