@@ -1,0 +1,12 @@
+class CreateBorrowRecords < ActiveRecord::Migration
+  def change
+    create_table :borrow_records do |t|
+      t.string :reader_id
+      t.string :integer
+      t.string :book_id
+      t.string :integer
+
+      t.timestamps
+    end
+  end
+end
