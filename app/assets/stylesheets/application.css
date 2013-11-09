@@ -16,8 +16,16 @@ body {
     background-color: #eee;
 }
 
-.full-width {
+header {
+    background-color:#663399;
+    color:white;
+}
+
+.card {
     background-color: #fff;
+}
+
+header, .card {
     width: 900px;
     margin:auto;
     margin-top:5px;
@@ -26,4 +34,5 @@ body {
     border-color:#ccc;
     border-width:1px;
     border-radius:5px;
+
 }

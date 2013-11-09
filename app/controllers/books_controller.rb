@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
     @books = Book.all
+    @all_field = ["标题", "作者"]
 
     respond_to do |format|
       format.html # index.html.erb

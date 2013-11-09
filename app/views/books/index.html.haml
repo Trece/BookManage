@@ -1,15 +1,24 @@
-%h1.full-width Listing books
-%header.full-width
-  %form{role: "form"}
-    %div.col-sm-10
+%header
+  %h1 Listing books
+%div.card
+  %form.form-inline{role: "form"}
+    %div.form-group{class: "col-md-2"}
+      %select.form-control
+        - @all_field.each do |field|
+          %option= field
+    %div.form-group{class: "col-md-8"}
       %input{class: "form-control", type: "text"}
-    %div.col-sm-2
-      %button{class: "btn btn-default"} Search
+    %button{class: "btn btn-primary"} Search
 
 - @books.each do |book|
-  %div.full-width
+  %div.card
     %h3= book.title
-    %p= book.description
+    %div.row
+      %div.col-md-2
+        %strong
+          description
+      %div.col-md-10= book.description*20
     %br
-    = link_to 'Show', book
+    = link_to '更多', book
+
 %br
