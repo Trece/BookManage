@@ -1,0 +1,19 @@
+.header {
+    background-color:white;
+    width:900px;
+    margin:auto;
+    margin-top:5px;
+    position:relative;
+}
+
+.header_img {
+    width:900px;
+}
+
+.header_title {
+    position:absolute;
+    color:#663399;
+    left:330px;
+    top:30px;
+    font-size:72px;
+}

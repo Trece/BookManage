@@ -8,8 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require_tree ./bootstrap
  *= require_self
+ *= require_tree .
  */
 
 body {
@@ -19,20 +20,23 @@ body {
 header {
     background-color:#663399;
     color:white;
+    padding:25px;
 }
 
 .card {
     background-color: #fff;
+    padding:20px;
 }
 
-header, .card {
+header, .row {
     width: 900px;
     margin:auto;
     margin-top:5px;
-    padding:25px;
+}
+
+header, .card, {
     border:solid;
     border-color:#ccc;
     border-width:1px;
     border-radius:5px;
-
 }
