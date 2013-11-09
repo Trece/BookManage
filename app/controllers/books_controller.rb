@@ -82,4 +82,13 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # POST /search
+  def search
+    type = params[:type]
+    keywords = params[:keywords]
+    search_result = Book.search(type, keywords)
+
+    redirect_to books_url(:books => search_result)
+  end
 end

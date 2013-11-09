@@ -101,6 +101,153 @@
         2,
         null,
         null,
+        null,
+        null,
+        1,
+        2,
+        2,
+        2,
+        null,
+        2,
+        null,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/models/book.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/controllers/lib_manage_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/models/borrow_record.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/models/reader.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1383997899
+  },
+  "Cucumber Features": {
+    "coverage": {
+      "/home/winmad/THU/SaaS/BookManage/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/helpers/books_helper.rb": [
+        1,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/helpers/lib_manage_helper.rb": [
+        1,
+        null
+      ],
+      "/home/winmad/THU/SaaS/BookManage/app/controllers/books_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
         null
       ],
       "/home/winmad/THU/SaaS/BookManage/app/models/book.rb": [
@@ -132,6 +279,6 @@
         null
       ]
     },
-    "timestamp": 1383989523
+    "timestamp": 1383990103
   }
 }

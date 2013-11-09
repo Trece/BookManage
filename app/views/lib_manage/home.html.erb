@@ -7,9 +7,9 @@
 </div>
 <% @books.each do |book| %>
     <div class="book">
-        <div class="book_name"><%= book.name %></div>
+        <div class="book_name"><%= book.title %></div>
         <br />
         <div class="description"><%= book.description %></div>
-        <div>remain/total : <%= book.remain %> / <%= book.total %></div>
+        <div>remain/total : <%= book.remain_num %> / <%= book.total_num %></div>
     </div>
 <% end %>

@@ -157,4 +157,17 @@ describe BooksController do
     end
   end
 
+  describe "POST search" do
+    it "finds books by keys" do
+      fake_results = [mock('book1'), mock('book2')]
+      post :search
+      Book.should_receive(:search).and_return(fake_results)
+    end
+
+    it "redirects to the books list with search result" do
+      fake_search_result = [mock('book1'), mock('book2')]
+      post :search
+      response.should redirect_to(books_url)
+    end
+  end
 end
