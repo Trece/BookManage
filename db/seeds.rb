@@ -6,18 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-books = [{:name => 'Moonlight', :ISBN => 'ABCDETTTFG124', :description => 'It is a wonderful book', :total => 3, :remain => 1},
-         {:name => 'Sunshine', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total => 3, :remain => 3},
-         {:name => 'My life', :ISBN => 'AB23EFG124', :description => 'Bad book about a prisoner', :total => 1, :remain => 1}]
+books = [{:title => 'Moonlight', :ISBN => 'ABCDETTTFG124', :description => 'It is a wonderful book', :total_num => 3, :remain_num => 1},
+         {:title => 'Sunshine', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total_num => 3, :remain_num => 3},
+         {:title => 'My life', :ISBN => 'AB23EFG124', :description => 'Bad book about a prisoner', :total_num => 1,:remain_num => 1}]
 
-Book.send(:attr_accessible, :name, :ISBN, :description, :total, :remain)
 books.each do |book|
   Book.create! book
 end
 
 readers = [{:name => 'Tom', :email => 'haha@o.com', :phone => '12345678910'},
           {:name => 'Ann', :email => 'new.k@hi.com', :phone => '1123581321'},]
-Reader.send(:attr_accessible, :name, :email, :phone)
+
 readers.each do |reader|
   Reader.create! reader
+end
+
+borrow_records = [{:reader => Reader.find_by_name('Tom'), :book => Book.find_by_title('Moonlight')},
+                  {:reader => Reader.find_by_name('Tom'), :book => Book.find_by_title('Sunshine')}]
+
+borrow_records.each do |record|
+  BorrowRecord.create! record
 end

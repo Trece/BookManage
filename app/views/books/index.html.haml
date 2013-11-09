@@ -1,0 +1,15 @@
+%h1.full-width Listing books
+%header.full-width
+  %form{role: "form"}
+    %div.col-sm-10
+      %input{class: "form-control", type: "text"}
+    %div.col-sm-2
+      %button{class: "btn btn-default"} Search
+
+- @books.each do |book|
+  %div.full-width
+    %h3= book.title
+    %p= book.description
+    %br
+    = link_to 'Show', book
+%br
