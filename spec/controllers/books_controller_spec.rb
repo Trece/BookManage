@@ -160,13 +160,13 @@ describe BooksController do
   describe "POST search" do
     it "finds books by keys" do
       fake_results = [mock('book1'), mock('book2')]
-      post :search
       Book.should_receive(:search).and_return(fake_results)
+      post :search, {:type => :title, :keywords => "book"}, valid_session
     end
 
     it "redirects to the books list with search result" do
       fake_search_result = [mock('book1'), mock('book2')]
-      post :search
+      post :search, {:type => :title, :keywords => "book"}, valid_session
       response.should redirect_to(books_url)
     end
   end

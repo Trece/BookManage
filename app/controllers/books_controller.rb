@@ -3,7 +3,12 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if flash[:search_result].nil?
+      @books = Book.all
+    else
+      @books = flash[:search_result]
+    end
+
     @all_field = ["标题", "作者"]
 
     respond_to do |format|
@@ -83,12 +88,14 @@ class BooksController < ApplicationController
     end
   end
 
-  # POST /search
+  # POST /books/search
   def search
     type = params[:type]
     keywords = params[:keywords]
+
     search_result = Book.search(type, keywords)
 
-    redirect_to books_url(:books => search_result)
+    flash[:search_result] = search_result
+    redirect_to books_url
   end
 end

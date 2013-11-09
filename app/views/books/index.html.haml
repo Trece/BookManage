@@ -1,13 +1,13 @@
 %header
   %h1 Listing books
 %div.card
-  %form.form-inline{role: "form"}
+  %form.form-inline{role: "form", :method => :post, :action => search_books_path}
     %div.form-group{class: "col-md-2"}
-      %select.form-control
+      %select.form-control{:name => :type}
         - @all_field.each do |field|
           %option= field
     %div.form-group{class: "col-md-8"}
-      %input{class: "form-control", type: "text"}
+      %input{class: "form-control", type: "text", :name => :keywords}
     %button{class: "btn btn-primary"} Search
 
 - @books.each do |book|
