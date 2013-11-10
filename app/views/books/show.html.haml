@@ -1,7 +1,8 @@
 %header
   %h1 Details of #{@book.title}
 
-%p#notice= notice
+-if notice
+  %div.card{class: "full-width danger"}= notice
 
 %div.card{class: "full-width"}              
   %h3= @book.title                           
@@ -28,4 +29,15 @@
     %div.col-md-10                          
       #{@book.remain_num}/#{@book.total_num}  
   = link_to "返回", books_path
-
+  %br
+  %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
+    %div.form-group
+      %input{class: "form-control", type: "text", name: "reader_name", placeholder:"Your name", id: "borrow_reader"}
+    %button{class: "btn btn-primary", id: "borrow_button"} 借出
+  - unless @readers.empty?
+    %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
+      %div.form-group
+        %select.form-control{name: "reader_name", id: "return_reader"}
+          - @readers.each do |reader|
+            %option= reader.name
+      %button{class: "btn btn-primary", id: "return_button"} 归还

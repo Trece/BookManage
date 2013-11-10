@@ -14,6 +14,10 @@ BookManage::Application.routes.draw do
   match '/book/return/:id/' => 'books#return_book'
 
   resources :books do
+    member do
+      post 'borrow_book', as: :borrow
+      post 'return_book', as: :return
+    end
     collection do
       post 'search'
     end
