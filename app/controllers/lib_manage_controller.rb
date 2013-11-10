@@ -1,5 +1,5 @@
 class LibManageController < ApplicationController
   def home
-    @books = Book.find(:all)
+    @all_field = Book.all_fields
   end
 end
