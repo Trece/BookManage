@@ -98,4 +98,24 @@ class BooksController < ApplicationController
     flash[:search_result] = search_result
     redirect_to books_url
   end
+  
+  # GET /books/borrow/:id
+  def borrow_book
+    book = Book.find(params[:id])
+    reader = Reader.find(params[:reader_id])
+    if book.remain_num > 0
+      book.borrowed_by reader
+    else
+      flash[:notice] = "No more book left"
+    end
+    redirect_to book_path(book)
+  end
+
+  # GET /books/borrow/:id
+  def return_book
+    book = Book.find(params[:id])
+    reader = Reader.find(params[:reader_id])
+    book.returned_by reader
+    redirect_to book_path(book)
+  end
 end

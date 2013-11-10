@@ -1,24 +1,24 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/application_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/application_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/books_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/books_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/lib_manage_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/lib_manage_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/books_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/books_controller.rb": [
         null,
         1,
         null,
@@ -121,12 +121,37 @@
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/book.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/book.rb": [
         null,
         1,
         1,
         1,
         1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        4,
+        2,
+        2,
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        3,
+        3,
+        2,
+        2,
+        null,
+        1,
+        1,
+        null,
+        null,
         null,
         1,
         3,
@@ -145,21 +170,21 @@
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/lib_manage_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/lib_manage_controller.rb": [
         1,
         1,
         0,
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/borrow_record.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/borrow_record.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/reader.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/reader.rb": [
         1,
         1,
         1,
@@ -167,28 +192,28 @@
         null
       ]
     },
-    "timestamp": 1384017266
+    "timestamp": 1384056733
   },
   "Cucumber Features": {
     "coverage": {
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/application_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/application_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/books_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/books_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/helpers/lib_manage_helper.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/helpers/lib_manage_helper.rb": [
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/books_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/books_controller.rb": [
         null,
         1,
         null,
@@ -291,12 +316,16 @@
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/book.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/book.rb": [
         null,
         1,
         1,
         1,
         1,
+        null,
+        1,
+        0,
+        null,
         null,
         1,
         2,
@@ -315,21 +344,21 @@
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/controllers/lib_manage_controller.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/controllers/lib_manage_controller.rb": [
         1,
         1,
         0,
         null,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/borrow_record.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/borrow_record.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "/home/winmad/THU/SaaS/BookManage/app/models/reader.rb": [
+      "/Users/Tenut/Developer/ruby_code/book_manage/app/models/reader.rb": [
         1,
         1,
         1,
@@ -337,6 +366,6 @@
         null
       ]
     },
-    "timestamp": 1384026431
+    "timestamp": 1384050204
   }
 }

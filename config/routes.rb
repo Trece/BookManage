@@ -1,5 +1,5 @@
 BookManage::Application.routes.draw do
-  get "lib_manage/home"
+  match '/' => 'lib_manage#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -10,6 +10,9 @@ BookManage::Application.routes.draw do
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
+  match '/book/borrow/:id/' => 'books#borrow_book'
+  match '/book/return/:id/' => 'books#return_book'
+
   resources :books do
     collection do
       post 'search'

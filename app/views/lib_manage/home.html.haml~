@@ -1,0 +1,3 @@
+%header
+  %h1 IIIS Library
+= image_tag "library.jpg", class: "head_img"

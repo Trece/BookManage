@@ -1,0 +1,28 @@
+%div.header
+  =image_tag "open_book.jpg", class: "header_img"
+  %div.header_title Library
+
+%div.row{class: "card"}                           
+  %form.form-inline{role: "form"}                 
+    %div.form-group{class: "col-md-2"}            
+      %select.form-control                        
+        - @all_field.each do |field|              
+          %option= field                          
+    %div.form-group{class: "col-md-8"}            
+      %input{class: "form-control", type: "text"} 
+    %button{class: "btn btn-primary"} Search 
+                                                  
+
+%div.row
+  %div.col-md-6{class: "card"}
+    = link_to "View all books", books_path
+    %br
+    Wang
+  %div.col-md-6{class: "card"}
+    Wangwang
+    %br
+    lkjsdlfkjslka
+    %br
+    lksdjkf
+    %br
+    %strong hi

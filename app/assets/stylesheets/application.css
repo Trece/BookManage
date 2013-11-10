@@ -28,7 +28,7 @@ header {
     padding:20px;
 }
 
-header, .row {
+header, .full-width {
     width: 900px;
     margin:auto;
     margin-top:5px;
@@ -38,5 +38,5 @@ header, .card, {
     border:solid;
     border-color:#ccc;
     border-width:1px;
-    border-radius:5px;
+    border-radius:15px;
 }

@@ -1,6 +1,6 @@
 %header
   %h1 Listing books
-%div.card
+%div.card{class: "full-width"}
   %form.form-inline{role: "form", :method => :post, :action => search_books_path}
     %div.form-group{class: "col-md-2"}
       %select.form-control{:name => :type, :id => "search_type"}
@@ -11,14 +11,24 @@
     %button{class: "btn btn-primary", :id => "search_button"} Search
 
 - @books.each do |book|
-  %div.card
+  %div.card{class: "full-width"}
     %h3= book.title
     %div.row
       %div.col-md-2
         %strong
-          description
-      %div.col-md-10= book.description*20
-    %br
+          ISBN
+      %div.col-md-10= book.ISBN
+    %div.row
+      %div.col-md-2
+        %strong
+          author
+      %div.col-md-10= book.author
+    %div.row
+      %div.col-md-2
+        %strong
+          Remain/Total
+      %div.col-md-10
+        #{book.remain_num}/#{book.total_num}
     = link_to '更多', book
 
 %br

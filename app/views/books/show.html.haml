@@ -1,6 +1,31 @@
+%header
+  %h1 Details of #{@book.title}
+
 %p#notice= notice
 
+%div.card{class: "full-width"}              
+  %h3= @book.title                           
+  %div.row
+    %div.col-md-2
+      %strong
+        ISBN
+    %div.col-md-10= @book.ISBN
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        author                              
+    %div.col-md-10= @book.author             
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        description                         
+    %div.col-md-10= @book.description*20     
+  %br                                       
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        Remain/Total                        
+    %div.col-md-10                          
+      #{@book.remain_num}/#{@book.total_num}  
+  = link_to "返回", books_path
 
-= link_to 'Edit', edit_book_path(@book)
-\|
-= link_to 'Back', books_path
