@@ -105,8 +105,12 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     reader = Reader.find_by_name(params[:reader_name])
     if book.remain_num > 0
-      book.borrowed_by reader
-      flash[:notice] = "Borrowed successfully"
+      if reader == nil then
+        flash[:notice] = "Not sign up yet"
+      else
+        book.borrowed_by reader
+        flash[:notice] = "Borrowed successfully"
+      end
     else
       flash[:notice] = "No more book left"
     end

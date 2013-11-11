@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-books = [{:title => 'Moonlight', :author => 'Alice', :ISBN => 'ABCDETTTFG124', :description => 'It is a wonderful book', :total_num => 3, :remain_num => 1},
-         {:title => 'Sunshine', :author => 'Bob', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total_num => 3, :remain_num => 3},
+books = [{:title => 'Moonlight', :author => 'Alice', :ISBN => 'ABCDETTTFG124', :description => 'It is a wonderful book', :total_num => 3, :remain_num => 2},
+         {:title => 'Sunshine', :author => 'Bob', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total_num => 3, :remain_num => 2},
          {:title => 'My life', :author => 'Chris', :ISBN => 'AB23EFG124', :description => 'Bad book about a prisoner', :total_num => 1,:remain_num => 1}]
 
 books.each do |book|
