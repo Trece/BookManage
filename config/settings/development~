@@ -1,0 +1,4 @@
+login_url : "http://fake-tsinghua-id.herokuapp.com/login/form/3284d43331f3c7ec02be2c9bcc7f9d18/1/user"
+appid : "bookmanage"
+ticket_url : "http://fake-tsinghua-id.herokuapp.com/checkticket/test_app/"
+ip : "101_5_121_237"

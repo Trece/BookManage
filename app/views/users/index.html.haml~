@@ -1,0 +1,7 @@
+%h1 Listing users
+
+
+%p= @user.name
+%p= @user.email
+%p= @user.jobid
+

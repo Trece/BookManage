@@ -1,4 +1,6 @@
 BookManage::Application.routes.draw do
+
+
   match '/' => 'lib_manage#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -23,6 +25,8 @@ BookManage::Application.routes.draw do
 
   resources :readers do
   end
+
+  resources :users
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
