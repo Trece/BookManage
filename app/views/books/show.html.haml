@@ -30,12 +30,12 @@
       #{@book.remain_num}/#{@book.total_num}  
   = link_to "返回", books_path
   %br
-  %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
+  %form.form-inline{role: "form", method: :get, action: borrow_book_path(@book)}
     %div.form-group
       %input{class: "form-control", type: "text", name: "reader_name", placeholder:"Your name", id: "borrow_reader"}
     %button{class: "btn btn-primary", id: "borrow_button"} 借出
   - unless @readers.empty?
-    %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
+    %form.form-inline{role: "form", method: :get, action: return_book_path(@book)}
       %div.form-group
         %select.form-control{name: "reader_name", id: "return_reader"}
           - @readers.each do |reader|

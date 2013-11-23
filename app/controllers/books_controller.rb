@@ -114,7 +114,10 @@ class BooksController < ApplicationController
     else
       flash[:notice] = "No more book left"
     end
-    redirect_to book_path(book)
+    respond_to do |format|
+      format.json { head :no_content}
+      format.html { redirect_to book_path @book }
+    end
   end
 
   # GET /books/borrow/:id
@@ -126,6 +129,9 @@ class BooksController < ApplicationController
     else
       flash[:notice] = "You didn't borrowed this book"
     end
-    redirect_to book_path(book)
+    respond_to do |format|
+      format.json {head :no_content}
+      format.html { redirect_to book_path @book }
+    end
   end
 end

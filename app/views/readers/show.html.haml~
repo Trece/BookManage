@@ -1,0 +1,6 @@
+%p#notice= notice
+
+
+= link_to 'Edit', edit_reader_path(@reader)
+\|
+= link_to 'Back', readers_path

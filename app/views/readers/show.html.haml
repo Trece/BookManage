@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p Name:#{@reader.name}
+%p Email:#{@reader.email}
+%p Phone:#{@reader.phone}
+
+%strong borrowed books
+%table
+  - @reader.borrowed_books.each do |book|
+    %tr
+      %td= book.title
+      %td= link_to 'return', return_book_path(book, reader_name: @reader.name), remote: true
+
+= link_to 'Edit', edit_reader_path(@reader)
+\|
+= link_to 'Back', readers_path

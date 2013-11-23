@@ -1,0 +1,10 @@
+= form_for @reader do |f|
+  - if @reader.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@reader.errors.count, "error")} prohibited this reader from being saved:"
+      %ul
+        - @reader.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'
