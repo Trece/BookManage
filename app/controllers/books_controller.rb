@@ -2,8 +2,8 @@
 require 'debugger'
 class BooksController < ApplicationController
 
-  before_filter 
-  
+  before_filter :auth_admin_no_redirect
+
   # GET /books
   # GET /books.json
   def index
@@ -101,7 +101,7 @@ class BooksController < ApplicationController
     flash[:search_result] = search_result
     redirect_to books_url
   end
-  
+
   def borrow_book
     book = Book.find(params[:id])
     reader = Reader.find_by_name(params[:reader_name])
