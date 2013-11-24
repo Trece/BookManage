@@ -56,6 +56,14 @@ describe UsersController do
     end
   end
 
+  describe "logout" do
+    it "should clear the session" do
+      session[:user_id] = "1"
+      get :logout, id: "1"
+      session[:user_id].should == nil
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
