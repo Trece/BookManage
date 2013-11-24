@@ -1,8 +1,7 @@
 class ReadersController < ApplicationController
-  
+
   before_filter :auth_reader, except: :index
   before_filter :auth_admin, only: :index
-  
 
   # GET /readers
   # GET /readers.json

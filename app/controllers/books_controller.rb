@@ -2,6 +2,8 @@
 require 'debugger'
 class BooksController < ApplicationController
 
+  protect_from_forgery :except => [:borrow_book, :return_book]
+
   before_filter :auth_admin_no_redirect
 
   # GET /books
