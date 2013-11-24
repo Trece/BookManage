@@ -4,8 +4,19 @@ describe ReadersController do
 
   let(:valid_attributes) { {  } }
   let(:valid_session) { {} }
-
-  describe "GET index" do
+  
+  describe "index" do
+    before(:each) do 
+      @user = FactoryGirl.build(:user)
+      @reader = FactoryGirl.build(:reader)
+    end
+    it "should forbid visit except super" do
+      @user.stub(:is_admin?).and_return(true)
+      ReadersController.stub(:current_user).and_return(@user)
+      Reader.should_receive(:all).and_return([@reader])
+      get :index
+      assigns(:readers).should == [@reader]
+    end
     it "assigns all readers as @readers" do
       reader = Reader.create! valid_attributes
       get :index, {}, valid_session
