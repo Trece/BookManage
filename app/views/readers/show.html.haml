@@ -11,6 +11,6 @@
       %td= book.title
       %td= link_to 'return', return_book_path(book, reader_name: @reader.name), remote: true
 
-= link_to 'Edit', edit_reader_path(@reader)
+= link_to 'Edit', edit_reader_path(@reader), id: "edit"
 \|
-= link_to 'Back', readers_path
+= link_to 'Back', readers_path, id: "back"

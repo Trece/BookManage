@@ -22,8 +22,8 @@ module NavigationHelpers
     when /^the details page for "([^"]*)"/
       book_path(Book.find_by_title($1))
       
-    when /^the details page for person "([^"]*)"/
-      reader(Reader.find_by_name($1))
+    when /^the details page for reader "([^"]*)"/
+      reader_path(Reader.find_by_name($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

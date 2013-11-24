@@ -10,9 +10,9 @@
   - @readers.each do |reader|
     %tr
       %td= reader.name
-      %td= link_to 'Show', reader
-      %td= link_to 'Edit', edit_reader_path(reader)
-      %td= link_to 'Destroy', reader, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Show', reader, id: "show"
+      %td= link_to 'Edit', edit_reader_path(reader), id: "edit"
+      %td= link_to 'Destroy', reader, :method => :delete, :data => { :confirm => 'Are you sure?', id: "destroy" }
 
 %br
 

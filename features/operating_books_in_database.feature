@@ -12,22 +12,26 @@ Background: books and readers should be added to the database
   |Moonlight |Alice  |2         |2          |Miaomiao    |
   |My Life   |Alice  |1         |1          |Gogo        |
 
+  Given these users exist:
+  |jobid            |name    |
+  |2010010001       |Tom     |
+  |2010000000       |Tim     |
+
   And these readers exist:
-  |name |email     |
-  |Tom  |hi@g.com  |
-  |Tim  |tim@r.com |
+  |name |email     |       
+  |Tom  |hi@g.com  |       
+  |Tim  |tim@r.com |      
 
   And these borrow relations exist:
   |book_title |reader_name|
   |Moonlight  |Tom        |
   |My Life    |Tim        |
 
-  Given I logined as admin
-  When I am on the home page
-  And I follow "view_book"
+  Given I am on the home page
+  And I follow "login"
   
 Scenario: someone borrows a book with enough left
-  Then I go to the details page for "Moonlight"
+  Given I am on the details page for "Moonlight"
   When I fill in "borrow_reader" with "Tim"
   And I press "borrow_button"
   Then I should see "0/2"

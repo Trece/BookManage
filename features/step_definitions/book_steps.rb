@@ -20,9 +20,4 @@ Then /^I should (not )?see book "([^"]*)"$/ do |flag, book_title|
   end
 end
 
-Given /^I logined as admin$/ do
-  headers = {}
-  Rack::Utils.set_cookie_header!(headers, :user_id , 1)
-  cookie_string = headers['Set-Cookie']
-  Capybara.current_session.driver.browser.set_cookie(cookie_string)
-end
+

@@ -24,6 +24,5 @@ Given /^I logined as admin$/ do
   headers = {}
   Rack::Utils.set_cookie_header!(headers, :user_id , 1)
   cookie_string = headers['Set-Cookie']
-  debugger
   Capybara.current_session.driver.browser.set_cookie(cookie_string)
 end
