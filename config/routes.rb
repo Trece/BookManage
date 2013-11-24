@@ -31,6 +31,9 @@ BookManage::Application.routes.draw do
     member do
       get 'logout'
     end
+    collection do
+      get 'login'
+    end
   end
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):

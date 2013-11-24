@@ -1,0 +1,12 @@
+class LibManageController < ApplicationController
+  def home
+    @login_url = User.login_url
+    @all_field = Book.all_fields
+    @reader = current_reader
+  end
+  
+  # GET /users/login
+  def login
+    redirect_to User.login_url
+  end
+end

@@ -2,7 +2,7 @@
   %div.full-width{class: "card"}= link_to "profile", reader_path(@reader)
   %div.full-width{class: "card"}= link_to "logout", logout_user_path(@reader)
 -else
-  %div.full-width{class: "card"}= link_to "login", @login_url
+  %div.full-width{class: "card", id: "login"}= link_to "login", login_users_path
 %div.header
   =image_tag "open_book.jpg", class: "header_img"
   %div.header_title Library
@@ -24,7 +24,7 @@
 
 %div.full-width
   %div.col-md-6{class: "card"}
-    = link_to "View all books", books_path
+    = link_to "View all books", books_path, id: "view_book"
     %br
     Wang
     %br

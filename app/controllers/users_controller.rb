@@ -35,6 +35,11 @@ class UsersController < ApplicationController
     redirect_to home_path
   end
 
+  # GET /users/login
+  def login
+    redirect_to User.login_url
+  end
+  
   # GET /users/:id/logout
   def logout
     session[:user_id] = nil

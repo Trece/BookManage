@@ -1,5 +1,6 @@
 require 'uri'
 require 'net/http'
+require 'debugger'
 
 class UsersController < ApplicationController
   # GET /users
@@ -13,23 +14,31 @@ class UsersController < ApplicationController
     response = Net::HTTP.get(URI.parse(User.ticket_url + "#{ticket}/#{ip}"))
     if response == '' or /code=1/.match(response) then
       flash[:notice] = "Login Failed"
-      redirect_to '/' and return
     else
       jobid = /zjh=(\d+)/.match(response)[1]
-      name = /xm=([^:])/.match(response)[1]
-      email = /email=([^\b])/.match(response)[1]
+      name = /xm=([^:]+)/.match(response)[1]
+      email = /email=([^\b:]+)/.match(response)[1]
       user = User.find_by_jobid(jobid)
-      unless user        
+      if user
+        user.update_attributes(name: name)
+      else
         user = User.create(jobid: jobid, name: name)
+      end
+      if user.reader
+        user.reader.update_attributes(name: name)
+      else
         reader = Reader.create(name: name, email: email, user: user)
       end
+      session[:user_id] = user.id
       @user = user
     end
+    redirect_to home_path
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+  # GET /users/:id/logout
+  def logout
+    session[:user_id] = nil
+    redirect_to home_path
   end
 
   # GET /users/1

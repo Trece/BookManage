@@ -13,4 +13,4 @@ Background: persons should be added to database
   |Tenut |tenut@a.com|          |
 
 Scenario: someone added his email address
-  Given I am on the details page for personal
+  Given I am on the details page for person "Tim"

@@ -22,9 +22,13 @@ Background: books and readers should be added to the database
   |Moonlight  |Tom        |
   |My Life    |Tim        |
 
+  Given I logined as admin
+  When I am on the home page
+  And I follow "view_book"
+  
 Scenario: someone borrows a book with enough left
-  Given I am on the details page for "Moonlight"
-  When I fill in "reader_name" with "Tim"
+  Then I go to the details page for "Moonlight"
+  When I fill in "borrow_reader" with "Tim"
   And I press "borrow_button"
   Then I should see "0/2"
   And I should see "Tim"
@@ -32,7 +36,7 @@ Scenario: someone borrows a book with enough left
 
 Scenario: someone borrows a book without enough left
   Given I am on the details page for "My Life"
-  When I fill in "reader_name" with "Tom"
+  When I fill in "borrow_reader" with "Tom"
   And I press "borrow_button"
   Then I should see "0/1"
   And I should not see "Tom"
