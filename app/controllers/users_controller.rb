@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       user = User.find_by_jobid(jobid)
       if user
         user.update_attributes(name: name)
-      else        
+      else
         user = User.create(jobid: jobid, name: name)
       end
       if user.reader
@@ -32,6 +32,12 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       @user = user
     end
+    redirect_to home_path
+  end
+
+  # GET /users/:id/logout
+  def logout
+    session[:user_id] = nil
     redirect_to home_path
   end
 

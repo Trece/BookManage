@@ -24,9 +24,14 @@ BookManage::Application.routes.draw do
   end
 
   resources :readers do
+
   end
 
-  resources :users
+  resources :users do
+    member do
+      get 'logout'
+    end
+  end
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
