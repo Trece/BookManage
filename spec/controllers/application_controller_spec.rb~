@@ -1,0 +1,7 @@
+require 'spec_helper'
+
+describe ApplicationController do
+  describe "current_user" do
+    session[:user_id] = "5"
+    User.should_receive(:find).with("5")
+  end

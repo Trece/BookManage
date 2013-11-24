@@ -4,7 +4,7 @@ describe ReadersController do
 
   let(:valid_attributes) { {  } }
   let(:valid_session) { {} }
-
+  
   describe "GET index" do
     it "assigns all readers as @readers" do
       reader = Reader.create! valid_attributes

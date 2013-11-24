@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    debugger
     ticket = params[:ticket]
     ip = request.remote_ip.gsub(/[.]/, '_')
     #if Settings.ip then
@@ -15,11 +14,10 @@ class UsersController < ApplicationController
     response = Net::HTTP.get(URI.parse(User.ticket_url + "#{ticket}/#{ip}"))
     if response == '' or /code=1/.match(response) then
       flash[:notice] = "Login Failed"
-      redirect_to '/' and return
     else
       jobid = /zjh=(\d+)/.match(response)[1]
       name = /xm=([^:]+)/.match(response)[1]
-      email = /email=([^\b]+)/.match(response)[1]
+      email = /email=([^\b:]+)/.match(response)[1]
       user = User.find_by_jobid(jobid)
       if user
         user.update_attributes(name: name)
@@ -34,11 +32,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       @user = user
     end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+    redirect_to home_path
   end
 
   # GET /users/1
