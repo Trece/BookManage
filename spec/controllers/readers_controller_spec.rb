@@ -4,27 +4,49 @@ describe ReadersController do
 
   let(:valid_attributes) { {  } }
   let(:valid_session) { {} }
-
-  describe "GET index" do
-    it "assigns all readers as @readers" do
-      reader = Reader.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:readers).should eq([reader])
+  
+  describe "index" do
+    before(:each) do 
+      @user = FactoryGirl.build(:user)
+      @reader = FactoryGirl.build(:reader)
+    end
+    it "should accept super" do
+      User.stub(:find).and_return(@user)
+      @user.stub(:is_admin?).and_return(true)
+      ReadersController.stub(:current_user).and_return(@user)
+      Reader.should_receive(:all).and_return([@reader])
+      session[:user_id] = "1"
+      get :index
+      assigns(:readers).should == [@reader]
+    end
+    it "should forbid all other reader" do
+      User.stub(:find).and_return(@user)
+      @user.stub(:is_admin?).and_return(false)
+      session[:user_id] = "1"
+      get :index
+      response.should redirect_to home_path
+      flash[:notice].should == "Permission denied"
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested reader as @reader" do
-      reader = Reader.create! valid_attributes
-      get :show, {:id => reader.to_param}, valid_session
-      assigns(:reader).should eq(reader)
+  describe "show" do
+    before(:each) do 
+      @user = FactoryGirl.build(:user)
+      @reader = FactoryGirl.build(:reader)
     end
-  end
 
-  describe "GET new" do
-    it "assigns a new reader as @reader" do
-      get :new, {}, valid_session
-      assigns(:reader).should be_a_new(Reader)
+    it "assigns the requested reader as @reader when user is valid" do
+      session[:user_id] = "1"
+      User.stub(:find).and_return(@user)
+      @user.stub(:reader).and_return(@reader)
+      get :show, id: @reader.id
+      assigns[:reader].should == @reader
+    end
+
+    it "redirect when reader isn't valid" do
+      get :show, id: @reader.id
+      response.should redirect_to home_path
+      flash[:notice].should == "Permission denied"
     end
   end
 
@@ -36,42 +58,6 @@ describe ReadersController do
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Reader" do
-        expect {
-          post :create, {:reader => valid_attributes}, valid_session
-        }.to change(Reader, :count).by(1)
-      end
-
-      it "assigns a newly created reader as @reader" do
-        post :create, {:reader => valid_attributes}, valid_session
-        assigns(:reader).should be_a(Reader)
-        assigns(:reader).should be_persisted
-      end
-
-      it "redirects to the created reader" do
-        post :create, {:reader => valid_attributes}, valid_session
-        response.should redirect_to(Reader.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved reader as @reader" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reader.any_instance.stub(:save).and_return(false)
-        post :create, {:reader => {  }}, valid_session
-        assigns(:reader).should be_a_new(Reader)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reader.any_instance.stub(:save).and_return(false)
-        post :create, {:reader => {  }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
 
   describe "PUT update" do
     describe "with valid params" do
@@ -114,21 +100,6 @@ describe ReadersController do
         put :update, {:id => reader.to_param, :reader => {  }}, valid_session
         response.should render_template("edit")
       end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested reader" do
-      reader = Reader.create! valid_attributes
-      expect {
-        delete :destroy, {:id => reader.to_param}, valid_session
-      }.to change(Reader, :count).by(-1)
-    end
-
-    it "redirects to the readers list" do
-      reader = Reader.create! valid_attributes
-      delete :destroy, {:id => reader.to_param}, valid_session
-      response.should redirect_to(readers_url)
     end
   end
 
