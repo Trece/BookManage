@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       redirect_to home_path
       false
     end
-    
+
   end
 
   def auth_admin
@@ -37,4 +37,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def auth_admin_no_redirect
+    if current_user and current_user.is_admin? then
+      @admin_flag = true
+    else
+      @admin_flag = false
+    end
+  end
 end
