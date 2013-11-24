@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+require 'debugger'
 class BooksController < ApplicationController
+
+  before_filter 
+  
   # GET /books
   # GET /books.json
   def index
@@ -98,7 +102,6 @@ class BooksController < ApplicationController
     redirect_to books_url
   end
   
-  # GET /books/borrow/:id
   def borrow_book
     book = Book.find(params[:id])
     reader = Reader.find_by_name(params[:reader_name])
@@ -112,13 +115,13 @@ class BooksController < ApplicationController
     else
       flash[:notice] = "No more book left"
     end
+    debugger
     respond_to do |format|
       format.json { head :no_content}
-      format.html { redirect_to book_path @book }
+      format.html { redirect_to book_path(book) }
     end
   end
 
-  # GET /books/borrow/:id
   def return_book
     book = Book.find(params[:id])
     reader = Reader.find_by_name(params[:reader_name])
@@ -129,7 +132,7 @@ class BooksController < ApplicationController
     end
     respond_to do |format|
       format.json {head :no_content}
-      format.html { redirect_to book_path @book }
+      format.html { redirect_to book_path(book) }
     end
   end
 end

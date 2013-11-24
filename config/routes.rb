@@ -1,7 +1,7 @@
 BookManage::Application.routes.draw do
 
 
-  match '/' => 'lib_manage#home'
+  match '/' => 'lib_manage#home', as: :home
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -15,8 +15,8 @@ BookManage::Application.routes.draw do
 
   resources :books do
     member do
-      get 'borrow_book', as: :borrow
-      get 'return_book', as: :return
+      post 'borrow_book', as: :borrow
+      post 'return_book', as: :return
     end
     collection do
       post 'search'
