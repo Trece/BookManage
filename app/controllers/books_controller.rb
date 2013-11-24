@@ -115,7 +115,6 @@ class BooksController < ApplicationController
     else
       flash[:notice] = "No more book left"
     end
-    debugger
     respond_to do |format|
       format.json { head :no_content}
       format.html { redirect_to book_path(book) }

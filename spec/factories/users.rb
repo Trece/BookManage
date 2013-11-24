@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :user do
-    jobid "MyString"
-    name "MyString"
+    jobid "1234568"
+    name "Dane"
+    id 12
   end
 end
