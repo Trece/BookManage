@@ -1,10 +1,12 @@
 require 'uri'
 require 'net/http'
+require 'debugger'
 
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    debugger
     ticket = params[:ticket]
     ip = request.remote_ip.gsub(/[.]/, '_')
     #if Settings.ip then
@@ -21,11 +23,15 @@ class UsersController < ApplicationController
       user = User.find_by_jobid(jobid)
       if user
         user.update_attributes(name: name)
-      else
+      else        
         user = User.create(jobid: jobid, name: name)
+      end
+      if user.reader
+        user.reader.update_attributes(name: name)
+      else
         reader = Reader.create(name: name, email: email, user: user)
       end
-      session[:user] = user
+      session[:user_id] = user.id
       @user = user
     end
 

@@ -1,4 +1,9 @@
 class ReadersController < ApplicationController
+  
+  before_filter :auth_reader, except: :index
+  before_filter :auth_admin, only: :index
+  
+
   # GET /readers
   # GET /readers.json
   def index
@@ -13,7 +18,7 @@ class ReadersController < ApplicationController
   # GET /readers/1
   # GET /readers/1.json
   def show
-    @reader = Reader.find(params[:id])
+    @reader = current_reader
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @reader }
@@ -78,4 +83,5 @@ class ReadersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

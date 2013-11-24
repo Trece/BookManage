@@ -1,6 +1,14 @@
+-if @reader
+  %div.full-width{class: "card"}= link_to "profile", reader_path(@reader)
+-else
+  %div.full-width{class: "card"}= link_to "login", @login_url
 %div.header
   =image_tag "open_book.jpg", class: "header_img"
   %div.header_title Library
+
+-if flash[:notice]
+  %div.full-width{class: "card danger"}= flash[:notice]
+
 
 %div.full-width{class: "card"}                           
   %form.form-inline{role: "form", method: "post", action: search_books_path}  
@@ -25,5 +33,5 @@
       Notifications
     %br
     Today is Sunday, I'm going for some fun. Don't bother me with the library stuff.
-%br
-= link_to "login", @login_url
+
+
