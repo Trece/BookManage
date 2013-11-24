@@ -9,7 +9,7 @@ class BooksController < ApplicationController
       @books = flash[:search_result]
     end
 
-    @all_field = ["标题", "作者"]
+    @all_field = Book.all_fields
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,6 +21,7 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @book = Book.find(params[:id])
+    @readers = @book.borrowed_readers
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,8 +29,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /books/new
-  # GET /books/new.json
+ # GET /books/new
+ # GET /books/new.json
   def new
     @book = Book.new
 
@@ -39,13 +40,13 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /books/1/edit
+ # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
+   @book = Book.find(params[:id])
   end
 
-  # POST /books
-  # POST /books.json
+ # POST /books
+ # POST /books.json
   def create
     @book = Book.new(params[:book])
 
@@ -60,14 +61,14 @@ class BooksController < ApplicationController
     end
   end
 
-  # PUT /books/1
-  # PUT /books/1.json
+ # PUT /books/1
+ # PUT /books/1.json
   def update
     @book = Book.find(params[:id])
 
     respond_to do |format|
       if @book.update_attributes(params[:book])
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+       format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,8 +77,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /books/1
-  # DELETE /books/1.json
+ # DELETE /books/1
+ # DELETE /books/1.json
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
@@ -92,9 +93,7 @@ class BooksController < ApplicationController
   def search
     type = params[:type]
     keywords = params[:keywords]
-
     search_result = Book.search(type, keywords)
-
     flash[:search_result] = search_result
     redirect_to books_url
   end
@@ -102,20 +101,35 @@ class BooksController < ApplicationController
   # GET /books/borrow/:id
   def borrow_book
     book = Book.find(params[:id])
-    reader = Reader.find(params[:reader_id])
+    reader = Reader.find_by_name(params[:reader_name])
     if book.remain_num > 0
-      book.borrowed_by reader
+      if reader == nil then
+        flash[:notice] = "Not sign up yet"
+      else
+        book.borrowed_by reader
+        flash[:notice] = "Borrowed successfully"
+      end
     else
       flash[:notice] = "No more book left"
     end
-    redirect_to book_path(book)
+    respond_to do |format|
+      format.json { head :no_content}
+      format.html { redirect_to book_path @book }
+    end
   end
 
   # GET /books/borrow/:id
   def return_book
     book = Book.find(params[:id])
-    reader = Reader.find(params[:reader_id])
-    book.returned_by reader
-    redirect_to book_path(book)
+    reader = Reader.find_by_name(params[:reader_name])
+    if book.returned_by reader
+      flash[:notice] = "Return successfully"
+    else
+      flash[:notice] = "You didn't borrowed this book"
+    end
+    respond_to do |format|
+      format.json {head :no_content}
+      format.html { redirect_to book_path @book }
+    end
   end
 end

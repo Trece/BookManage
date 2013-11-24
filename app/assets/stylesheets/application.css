@@ -34,9 +34,14 @@ header, .full-width {
     margin-top:5px;
 }
 
-header, .card, {
+header, .card {
     border:solid;
     border-color:#ccc;
     border-width:1px;
-    border-radius:15px;
+    border-radius:5px;
+}
+
+.danger {
+    background-color:red;
+    color:white;
 }

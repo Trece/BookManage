@@ -2,27 +2,28 @@
   =image_tag "open_book.jpg", class: "header_img"
   %div.header_title Library
 
-%div.row{class: "card"}                           
+%div.full-width{class: "card"}                           
   %form.form-inline{role: "form", method: "post", action: search_books_path}  
     %div.form-group{class: "col-md-2"}            
-      %select.form-control{name: "type", id: "search_type}      
+      %select.form-control{name: "type", id: "search_type"}      
         - @all_field.each do |field|              
           %option= field                          
     %div.form-group{class: "col-md-8"}            
-      %input{class: "form-control", type: "text", id: "search_keywords"} 
+      %input{class: "form-control", type: "text", name: "keywords", id: "search_keywords"} 
     %button{class: "btn btn-primary"} Search 
                                                   
 
-%div.row
+%div.full-width
   %div.col-md-6{class: "card"}
     = link_to "View all books", books_path
     %br
     Wang
+    %br
+    The system is wonferful.
   %div.col-md-6{class: "card"}
-    Wangwang
+    %strong
+      Notifications
     %br
-    lkjsdlfkjslka
-    %br
-    lksdjkf
-    %br
-    %strong hi
+    Today is Sunday, I'm going for some fun. Don't bother me with the library stuff.
+%br
+= link_to "login", @login_url
