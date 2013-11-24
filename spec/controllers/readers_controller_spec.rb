@@ -50,56 +50,51 @@ describe ReadersController do
     end
   end
 
-  describe "GET edit" do
+  describe "edit" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @reader = FactoryGirl.build(:reader)
+      session[:user_id] = "1"
+    end
+    it "calls the filter" do
+      controller.should_receive(:auth_reader).and_return(true)
+      controller.stub(:current_reader).and_return(@reader)
+      get :edit, id: @reader.id
+    end
     it "assigns the requested reader as @reader" do
-      reader = Reader.create! valid_attributes
-      get :edit, {:id => reader.to_param}, valid_session
-      assigns(:reader).should eq(reader)
+      User.stub(:find).and_return(@user)
+      @user.stub(:reader).and_return(@reader)
+      get :edit, id: @reader.id
+      assigns[:reader].should == @reader
     end
   end
 
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested reader" do
-        reader = Reader.create! valid_attributes
-        # Assuming there are no other readers in the database, this
-        # specifies that the Reader created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Reader.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
-        put :update, {:id => reader.to_param, :reader => { "these" => "params" }}, valid_session
-      end
-
-      it "assigns the requested reader as @reader" do
-        reader = Reader.create! valid_attributes
-        put :update, {:id => reader.to_param, :reader => valid_attributes}, valid_session
-        assigns(:reader).should eq(reader)
-      end
-
-      it "redirects to the reader" do
-        reader = Reader.create! valid_attributes
-        put :update, {:id => reader.to_param, :reader => valid_attributes}, valid_session
-        response.should redirect_to(reader)
-      end
+  describe "update" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @reader = FactoryGirl.build(:reader)
+      session[:user_id] = "1"
     end
-
-    describe "with invalid params" do
-      it "assigns the reader as @reader" do
-        reader = Reader.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reader.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reader.to_param, :reader => {  }}, valid_session
-        assigns(:reader).should eq(reader)
-      end
-
-      it "re-renders the 'edit' template" do
-        reader = Reader.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reader.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reader.to_param, :reader => {  }}, valid_session
-        response.should render_template("edit")
-      end
+    it "calls the filter" do
+      controller.should_receive(:auth_reader).and_return(true)
+      controller.stub(:current_reader).and_return(@reader)
+      get :edit, id: @reader.id
+    end
+    it "calls the update the database correctly" do
+      dict = {"email" => "ss@gmail.com"}
+      controller.stub(:auth_reader).and_return(true)
+      controller.stub(:current_reader).and_return(@reader)
+      @reader.should_receive(:update_attributes).with(dict).and_return(true)
+      put :update, reader: dict, id: @reader.id
+    end
+    it "redirect with error correctly when invalid" do
+      dict = {"email" => "ss@gmail.com"}
+      controller.stub(:auth_reader).and_return(true)
+      controller.stub(:current_reader).and_return(@reader)
+      @reader.stub(:update_attributes).with(dict).and_return(false)
+      put :update, reader: dict, id: @reader.id
+      response.should render_template "edit"
     end
   end
 

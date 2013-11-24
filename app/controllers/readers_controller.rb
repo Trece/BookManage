@@ -26,14 +26,14 @@ class ReadersController < ApplicationController
 
   # GET /readers/1/edit
   def edit
-    @reader = Reader.find(params[:id])
+    @reader = current_reader
   end
 
 
   # PUT /readers/1
   # PUT /readers/1.json
   def update
-    @reader = Reader.find(params[:id])
+    @reader = current_reader
 
     respond_to do |format|
       if @reader.update_attributes(params[:reader])

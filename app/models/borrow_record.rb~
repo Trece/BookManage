@@ -1,5 +1,0 @@
-class BorrowRecord < ActiveRecord::Base
-  attr_accessible :book_id, :integer, :integer, :reader_id
-  belongs_to :reader
-  belongs_to :book
-end
