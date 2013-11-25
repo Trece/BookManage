@@ -1,11 +1,15 @@
 %h1 Listing readers
 
-%table
+%table.table
   %tr
     %th Name
+    %th Email
+    %th Phone
 
   - @readers.each do |reader|
     %tr
       %td= reader.name
+      %td= reader.email
+      %td= reader.phone
 %br
 
