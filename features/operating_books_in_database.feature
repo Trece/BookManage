@@ -12,19 +12,27 @@ Background: books and readers should be added to the database
   |Moonlight |Alice  |2         |2          |Miaomiao    |
   |My Life   |Alice  |1         |1          |Gogo        |
 
+  Given these users exist:
+  |jobid            |name    |
+  |2010010002       |Tom     |
+  |2010000000       |Tim     |
+
   And these readers exist:
-  |name |email     |
-  |Tom  |hi@g.com  |
-  |Tim  |tim@r.com |
+  |name |email     |       
+  |Tom  |hi@g.com  |       
+  |Tim  |tim@r.com |      
 
   And these borrow relations exist:
   |book_title |reader_name|
   |Moonlight  |Tom        |
   |My Life    |Tim        |
 
+  Given I am on the home page
+  And I login as admin
+  
 Scenario: someone borrows a book with enough left
   Given I am on the details page for "Moonlight"
-  When I fill in "reader_name" with "Tim"
+  When I fill in "borrow_reader" with "Tim"
   And I press "borrow_button"
   Then I should see "0/2"
   And I should see "Tim"
@@ -32,7 +40,7 @@ Scenario: someone borrows a book with enough left
 
 Scenario: someone borrows a book without enough left
   Given I am on the details page for "My Life"
-  When I fill in "reader_name" with "Tom"
+  When I fill in "borrow_reader" with "Tom"
   And I press "borrow_button"
   Then I should see "0/1"
   And I should not see "Tom"
@@ -44,5 +52,3 @@ Scenario: someone returns a book
   And I press "return_button"
   Then I should see "2/2"
   And I should see "Return successfully"
-
-

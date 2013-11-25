@@ -30,15 +30,15 @@
       #{@book.remain_num}/#{@book.total_num}  
   = link_to "返回", books_path
   %br
-    - if @admin_flag
-      %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
+    /- if @admin_flag
+    %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
+      %div.form-group
+        %input{class: "form-control", type: "text", name: "reader_name", placeholder:"Your name", id: "borrow_reader"}
+      %button{class: "btn btn-primary", id: "borrow_button"} 借出
+    - unless @readers.empty?
+      %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
         %div.form-group
-          %input{class: "form-control", type: "text", name: "reader_name", placeholder:"Your name", id: "borrow_reader"}
-        %button{class: "btn btn-primary", id: "borrow_button"} 借出
-      - unless @readers.empty?
-        %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
-          %div.form-group
-            %select.form-control{name: "reader_name", id: "return_reader"}
-              - @readers.each do |reader|
-                %option= reader.name
-          %button{class: "btn btn-primary", id: "return_button"} 归还
+          %select.form-control{name: "reader_name", id: "return_reader"}
+            - @readers.each do |reader|
+              %option= reader.name
+        %button{class: "btn btn-primary", id: "return_button"} 归还

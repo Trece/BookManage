@@ -1,6 +1,6 @@
 -if @reader
   %div.full-width{class: "card"}= link_to "profile", reader_path(@reader), id: "profile"
-  %div.full-width{class: "card"}= link_to "logout", logout_user_path(@reader), id: "logout"
+  %div.full-width{class: "card"}= link_to "logout", logout_user_path(@reader)
 -else
   %div.full-width{class: "card", id: "login"}= link_to "login", login_users_path
 %div.header

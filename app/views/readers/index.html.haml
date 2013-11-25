@@ -3,17 +3,9 @@
 %table
   %tr
     %th Name
-    %th
-    %th
-    %th
 
   - @readers.each do |reader|
     %tr
       %td= reader.name
-      %td= link_to 'Show', reader
-      %td= link_to 'Edit', edit_reader_path(reader)
-      %td= link_to 'Destroy', reader, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
-= link_to 'New Reader', new_reader_path

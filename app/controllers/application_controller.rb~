@@ -1,0 +1,41 @@
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+
+  protected
+
+  def current_user
+    unless @user then
+      if session[:user_id] then
+        @user = User.find(session[:user_id])
+      end
+    end
+    @user
+  end
+
+  def current_reader
+    if current_user and current_user.reader then
+      current_user.reader
+    end
+  end
+
+  def auth_reader
+  	debugger
+    if current_reader and current_reader.id == params[:id].to_i then
+      true
+    else
+      flash[:notice] = "Permission denied"
+      redirect_to home_path
+      false
+    end
+    
+  end
+
+  def auth_admin
+    unless current_user and current_user.is_admin? then
+      flash[:notice] = "Permission denied"
+      redirect_to home_path
+      false
+    end
+  end
+
+end
