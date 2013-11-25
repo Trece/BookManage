@@ -8,6 +8,5 @@ describe User do
   it "should return have these utility methods" do
     User.appid.should_not == nil
     User.ticket_url.should_not == nil
-    User.ip.should_not == nil
   end
 end

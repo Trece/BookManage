@@ -7,29 +7,16 @@ describe BooksController do
       get("/books").should route_to("books#index")
     end
 
-    it "routes to #new" do
-      get("/books/new").should route_to("books#new")
-    end
-
     it "routes to #show" do
       get("/books/1").should route_to("books#show", :id => "1")
     end
 
-    it "routes to #edit" do
-      get("/books/1/edit").should route_to("books#edit", :id => "1")
+    it "routes to #search" do
+      post("/books/search").should route_to("books#search")
     end
-
-    it "routes to #create" do
-      post("/books").should route_to("books#create")
+    
+    it "routes to #borrow" do
+      post("/books/1/borrow_book").should route_to("books#borrow_book", id: "1")
     end
-
-    it "routes to #update" do
-      put("/books/1").should route_to("books#update", :id => "1")
-    end
-
-    it "routes to #destroy" do
-      delete("/books/1").should route_to("books#destroy", :id => "1")
-    end
-
   end
 end
