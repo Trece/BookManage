@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'simplecov'
 SimpleCov.start 'rails'
 
@@ -7,6 +8,7 @@ SimpleCov.start 'rails'
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+require 'cucumber/rspec/doubles'
 require 'cucumber/rails'
 
 # Capybara defaults to CSS3 selectors rather than XPath.

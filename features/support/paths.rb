@@ -21,6 +21,8 @@ module NavigationHelpers
     
     when /^the details page for "([^"]*)"/
       book_path(Book.find_by_title($1))
+    when /^the readers page/
+      readers_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
