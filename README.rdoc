@@ -5,7 +5,7 @@ To run this app, follow these steps.
 
 1. Get FakeTsinghua from the link above (and the development database included)
 2. Go to the FakeTsinghua directory, run
-       <tt>rails server -p 3030</tt>
+       rails server -p 3030
 3. Run this app normally
 4. The usernames and passwords are default in FakeTsinghua, the admin account is the "student_1 : 1234561"
 
