@@ -13,7 +13,7 @@ BookManage::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  resources :books do
+  resources :books, only: [:index, :show] do
     member do
       post 'borrow_book', as: :borrow
       post 'return_book', as: :return
@@ -23,16 +23,12 @@ BookManage::Application.routes.draw do
     end
   end
 
-  resources :readers do
+  resources :readers, only: [:index, :show, :edit, :update]
 
-  end
 
-  resources :users do
+  resources :users, only: :index do
     member do
       get 'logout'
-    end
-    collection do
-      get 'login'
     end
   end
 

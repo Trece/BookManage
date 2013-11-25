@@ -19,7 +19,7 @@ Background: readers should be in the database
 Scenario: go to the home page
 
   Given I am on the homepage
-  Then I should see "Search"
+  Then I should see "Search" button
   
 Scenario: if I am a guest, I can login
   Given I am on the home page

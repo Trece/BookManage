@@ -1,13 +1,12 @@
-= form_for @reader do |f|
-  - if @reader.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@reader.errors.count, "error")} prohibited this reader from being saved:"
-      %ul
-        - @reader.errors.full_messages.each do |msg|
-          %li= msg
-
+= form_for @reader, html: {class: "form-horizontal"} do |f|
   .actions
-    = f.text_field :name
-    = f.text_field :email
-    = f.text_field :phone
-    = f.submit 'Save', id: "save"
+    %div.form-group
+      %label.control-label{class: "col-md-2"} Name
+      = f.text_field :name, class: "col-md-8"
+    %div.form-group
+      %label.control-label{class: "col-md-2"} Email
+      = f.text_field :email, class:"col-md-8"
+    %div.form-group
+      %label.control-label{class: "col-md-2"} Phone
+      = f.text_field :phone, class:"col-md-8"
+    %button{class: "btn btn-primary col-md-offset-2"} Save

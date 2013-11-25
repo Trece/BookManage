@@ -8,10 +8,7 @@ class User < ActiveRecord::Base
     "bookmanage"
   end
   def self.ticket_url
-    "http://127.0.0.1:3030/checkticket/bookmanage/"
-  end
-  def self.ip
-    "101_5_121_237"
+    "http://127.0.0.1:3030/checkticket/" + self.appid + "/"
   end
   def is_admin?
     ["2010010001"].include? jobid
