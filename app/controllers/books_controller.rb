@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-require 'debugger'
 class BooksController < ApplicationController
 
   protect_from_forgery :except => [:borrow_book, :return_book]

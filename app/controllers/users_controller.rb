@@ -1,6 +1,5 @@
 require 'uri'
 require 'net/http'
-require 'debugger'
 
 class UsersController < ApplicationController
   # GET /users
