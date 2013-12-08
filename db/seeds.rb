@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 books = [{:title => 'Moonlight', :author => 'Alice', :ISBN => 'ABCDETTTFG124', :description => 'It is a wonderful book', :total_num => 3, :remain_num => 2},
-         {:title => 'Sunshine', :author => 'Bob', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total_num => 3, :remain_num => 2},
-         {:title => 'My life', :author => 'Chris', :ISBN => 'AB23EFG124', :description => 'Bad book about a prisoner', :total_num => 1,:remain_num => 1}]
+         {:title => 'Sunshine', :author => 'Bob', :ISBN => 'ABCDEFG133224', :description => 'It is also a wonderful book', :total_num => 3, :remain_num => 3},
+         {:title => 'My life', :author => 'Chris', :ISBN => 'AB23EFG124', :description => 'Bad book about a prisoner', :total_num => 1,:remain_num => 0}]
 
 books.each do |book|
   Book.create! book
@@ -22,13 +22,13 @@ readers.each do |reader|
 end
 
 borrow_records = [{:reader => Reader.find_by_name('Tom'), :book => Book.find_by_title('Moonlight')},
-                  {:reader => Reader.find_by_name('Tom'), :book => Book.find_by_title('Sunshine')}]
+                  {:reader => Reader.find_by_name('Tom'), :book => Book.find_by_title('My life')}]
 
 borrow_records.each do |record|
   BorrowRecord.create! record
 end
 
-reserve_records = [{:reader => Reader.find_by_name('Ann'), :book => Book.find_by_title('Sunshine')]
+reserve_records = [{:reader => Reader.find_by_name('Ann'), :book => Book.find_by_title('My life')]
 
 reserve_records.each do |record|
   ReserveRecord.create! record

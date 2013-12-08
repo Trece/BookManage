@@ -5,5 +5,6 @@ class AddUserRefToReader < ActiveRecord::Migration
       t.integer :book_id
 
       t.timestamps
+    end
   end
 end
