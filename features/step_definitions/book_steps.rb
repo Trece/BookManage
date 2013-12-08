@@ -20,6 +20,13 @@ Then /^I should (not )?see book "([^"]*)"$/ do |flag, book_title|
   end
 end
 
-Then /^I should see "([^"]+)" button$/ do |name|
-  find_button(name).should_not be_nil
+Then /^I should (not )?see "([^"]+)" button$/ do |anti, name|
+  if anti then
+    begin
+      find_button(name).should be_nil
+    rescue Capybara::ElementNotFound
+    end
+  else
+    find_button(name).should_not be_nil
+  end
 end

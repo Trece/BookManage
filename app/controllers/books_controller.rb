@@ -81,7 +81,7 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     reader = current_reader
     if book.reserved_by reader then
-      flash[:notice] = "Successed"
+      flash[:notice] = "Reserved successfully"
     else
       flash[:notice] = "Failed, there's still books left"
     end 
@@ -95,7 +95,7 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     reader = current_reader
     if book.unreserved_by reader then
-      flash[:notice] = "Successed"
+      flash[:notice] = "Unreserved successfully"
     else
       flash[:notice] = "Failed, you didn't reserve it"
     end
