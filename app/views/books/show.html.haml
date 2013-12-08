@@ -28,6 +28,10 @@
         Remain/Total                        
     %div.col-md-10                          
       #{@book.remain_num}/#{@book.total_num}  
+  - if @reserved_time != 0
+    %div.row
+      %div.col-md-12
+        reserved by #{@reserved_time} readers
   = link_to "返回", books_path
   %br
     - if @admin_flag
