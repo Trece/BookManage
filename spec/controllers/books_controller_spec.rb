@@ -35,7 +35,7 @@ describe BooksController do
     end
   end
 
-  describe "Borrow book" do
+  describe "borrow book" do
     it "should call the borrow method" do
       book = FactoryGirl.build(:book, remain_num: 2)
       reader = FactoryGirl.build(:reader, name: "Tom")
@@ -63,6 +63,42 @@ describe BooksController do
       Reader.stub(:find_by_name).and_return(reader)
       book.should_receive(:returned_by).with(reader)
       post :return_book, id: book.id, reader_name: reader.name
+    end
+  end
+
+  describe "reserve book" do
+    before :each do
+      @book = FactoryGirl.build(:book, remain_num: 0)
+      @reader = FactoryGirl.build(:reader, name: "Tom")
+      Book.stub(:find).and_return(@book)
+      controller.stub(:current_reader).and_return(@reader)
+    end
+    it "should call the reserve method" do
+      @book.should_receive(:reserved_by).with(@reader)
+      post :reserve_book, id: @book.id
+    end
+    it "should warn if book have remains" do
+      @book.stub(:reserved_by)
+      post :reserve_book, id: @book.id
+      flash[:notice].should == "Failed, there's still books left"
+    end
+  end
+
+  describe "unreserve book" do
+    before :each do
+      @book = FactoryGirl.build(:book, remain_num: 0)
+      @reader = FactoryGirl.build(:reader, name: "Tom")
+      Book.stub(:find).and_return(@book)
+      controller.stub(:current_reader).and_return(@reader)
+    end
+    it "should call the unreserve method" do
+      @book.should_receive(:unreserved_by).with(@reader)
+      post :unreserve_book, id: @book.id
+    end
+    it "should warn if he hasn't reserve the book" do
+      @book.stub(:unreserved_by).and_return(nil)
+      post :unreserve_book, id: @book.id
+      flash[:notice].should == "Failed, you didn't reserve it"
     end
   end
 end

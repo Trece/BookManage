@@ -3,6 +3,8 @@ class Book < ActiveRecord::Base
   attr_accessible :ISBN, :author, :description, :title, :total_num, :remain_num
   has_many :borrow_records
   has_many :borrowed_readers, through: :borrow_records, class_name: "Reader", source: :reader
+  has_many :reserve_records
+  has_many :reserved_readers, through: :reserve_records, class_name: "Reader", source: :reader
 
   def self.all_fields
     return ["标题", "作者"]
@@ -12,9 +14,6 @@ class Book < ActiveRecord::Base
     if remain_num > 0
       update_attribute(:remain_num, remain_num - 1)
       borrowed_readers << reader
-      true
-    else
-      nil
     end
   end
 
@@ -23,6 +22,22 @@ class Book < ActiveRecord::Base
       if borrowed_readers.find reader.id
         borrowed_readers.delete(reader)
         update_attribute(:remain_num, remain_num + 1)
+      end
+    rescue ActiveRecord::RecordNotFound
+      nil
+    end
+  end
+
+  def reserved_by(reader)
+    if remain_num == 0 then
+      reserved_readers << reader
+    end
+  end
+
+  def unreserved_by(reader)
+    begin
+      if reserved_readers.find reader.id then
+        reserved_readers.delete(reader)
       end
     rescue ActiveRecord::RecordNotFound
       nil

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    require 'debugger'
+    debugger
     ticket = params[:ticket]
     ip = request.remote_ip.gsub(/[.]/, '_')
 

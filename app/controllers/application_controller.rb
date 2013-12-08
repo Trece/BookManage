@@ -37,7 +37,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def auth_admin_no_redirect
+  def auth_flags
+    if current_user then
+      @user_flag = true
+    else
+      @user_flag = false
+    end
     if current_user and current_user.is_admin? then
       @admin_flag = true
     else
