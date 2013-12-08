@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-require 'debugger'
 class BooksController < ApplicationController
 
-  protect_from_forgery :except => [:borrow_book, :return_book]
+  protect_from_forgery
 
-  before_filter :auth_admin_no_redirect
+  before_filter :auth_flags
 
   # GET /books
   # GET /books.json
@@ -28,7 +27,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @readers = @book.borrowed_readers
-
+    @can_reserve = can_reserve
+    @can_unreserve = can_unreserve
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
@@ -76,4 +76,43 @@ class BooksController < ApplicationController
       format.html { redirect_to book_path(book) }
     end
   end
+
+  def reserve_book
+    book = Book.find(params[:id])
+    reader = current_reader
+    if book.reserved_by reader then
+      flash[:notice] = "Reserved successfully"
+    else
+      flash[:notice] = "Failed, there's still books left"
+    end 
+    respond_to do |format|
+      format.json {head :no_content}
+      format.html { redirect_to book_path(book) }
+    end
+  end
+
+  def unreserve_book
+    book = Book.find(params[:id])
+    reader = current_reader
+    if book.unreserved_by reader then
+      flash[:notice] = "Unreserved successfully"
+    else
+      flash[:notice] = "Failed, you didn't reserve it"
+    end
+    respond_to do |format|
+      format.json {head :no_content}
+      format.html { redirect_to book_path(book) }
+    end
+  end
+
+  private
+  
+  def can_reserve
+    @user_flag && (!@admin_flag) && @book.remain_num == 0 && !(@book.reserved_readers.include? current_reader)
+  end
+
+  def can_unreserve
+    @user_flag && (!@admin_flag) && (@book.reserved_readers.include? current_reader)
+  end
+
 end

@@ -17,6 +17,8 @@ BookManage::Application.routes.draw do
     member do
       post 'borrow_book', as: :borrow
       post 'return_book', as: :return
+      post 'reserve_book', as: :reserve
+      post 'unreserve_book', as: :unreserve
     end
     collection do
       post 'search'

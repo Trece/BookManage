@@ -74,4 +74,21 @@ describe Book do
       result.should == nil
     end
   end
+
+  describe "Reverve book" do
+    before :each do
+      @book = Book.create(title: "Aha", author: "Xi", total_num: 3, remain_num: 0)
+      @reader = Reader.create(name: "Tom")
+    end
+    it "should add a reader to the list" do
+      ReserveRecord.find_by_reader_id_and_book_id(@reader.id, @book.id).should == nil
+      @book.reserved_by @reader
+      ReserveRecord.find_by_reader_id_and_book_id(@reader.id, @book.id).should_not == nil
+    end
+    it "shouldn't add it if the book has remain number" do
+      @book.update_attribute(:remain_num, 2)
+      @book.reserved_by(@reader).should == nil
+      ReserveRecord.find_by_reader_id_and_book_id(@reader.id, @book.id).should == nil
+    end
+  end
 end

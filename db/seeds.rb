@@ -27,3 +27,9 @@ borrow_records = [{:reader => Reader.find_by_name('Tom'), :book => Book.find_by_
 borrow_records.each do |record|
   BorrowRecord.create! record
 end
+
+reserve_records = [{:reader => Reader.find_by_name('Ann'), :book => Book.find_by_title('Sunshine')]
+
+reserve_records.each do |record|
+  ReserveRecord.create! record
+end

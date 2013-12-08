@@ -8,6 +8,7 @@ gem 'omniauth'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
+  gem 'metric_fu'
   gem 'sqlite3'
   gem 'debugger'
   gem 'database_cleaner'
