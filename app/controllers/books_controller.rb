@@ -79,7 +79,7 @@ class BooksController < ApplicationController
 
   def reserve_book
     book = Book.find(params[:id])
-    reader = current_user.reader
+    reader = current_reader
     if book.reserved_by reader then
       flash[:notice] = "Successed"
     else
