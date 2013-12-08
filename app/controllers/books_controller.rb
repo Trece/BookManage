@@ -29,6 +29,7 @@ class BooksController < ApplicationController
     @readers = @book.borrowed_readers
     @can_reserve = can_reserve
     @can_unreserve = can_unreserve
+    @reserved_time = @book.reserved_readers.count
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
