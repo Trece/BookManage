@@ -11,4 +11,4 @@ To run this app, follow these steps.
 
 == Heroku Addr
 
-glacial-ridge-9566.herokuapp.com
+http://glacial-ridge-9566.herokuapp.com
