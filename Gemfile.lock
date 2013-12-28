@@ -212,6 +212,8 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.2.2)
       sexp_processor (~> 4.1)
+    rufus-scheduler (3.0.3)
+      tzinfo
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -255,11 +257,13 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   launchy
+  mail
   metric_fu
   omniauth
   pg
   rails (= 3.2.13)
   rspec-rails
+  rufus-scheduler
   sass-rails
   simplecov
   sqlite3
