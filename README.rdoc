@@ -9,3 +9,6 @@ To run this app, follow these steps.
 3. Run this app normally
 4. The usernames and passwords are default in FakeTsinghua, the admin account is the "student_1 : 1234561"
 
+== Heroku Addr
+
+http://glacial-ridge-9566.herokuapp.com
