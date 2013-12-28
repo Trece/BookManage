@@ -9,9 +9,13 @@ class Book < ActiveRecord::Base
   def self.all_fields
     return ["标题", "作者"]
   end
+
+  def has_remain
+    remain_num > reesrve_records.count
+  end
   
   def borrowed_by(reader)
-    if remain_num > reserve_records.count then
+    if has_remain then
       update_attribute(:remain_num, remain_num - 1)
       borrowed_readers << reader
     end

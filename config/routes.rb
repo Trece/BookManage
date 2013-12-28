@@ -13,6 +13,8 @@ BookManage::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
+  match '/admin/', to: 'admin#index', as: :admin
+
   resources :books, only: [:index, :show] do
     member do
       post 'borrow_book', as: :borrow

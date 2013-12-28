@@ -1,0 +1,20 @@
+%header 
+  %h1 Admin Page
+
+%div.card{class: "full-width"}
+  %h3 The borrowing status
+  %table.table
+    %tr
+      %th Title
+      %th Reader
+      %th Time
+    - @borrow_records_list.each do |record|
+      %tr
+        %td= record.book.title 
+        %td= record.reader.name
+        %td= record.created_at.strftime("%F")
+
+  %br
+  %table.table
+    %tr
+      %th

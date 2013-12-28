@@ -1,0 +1,7 @@
+%html
+  %body
+    %h1 Please return the book #{@book.title}
+    %p Hello, #{@reader.name}
+    %p The book you borrowed should be returned before #{@record.return_time}
+    - if @book.has_remain then
+      Do you wanna keep your book for another two weeks?
