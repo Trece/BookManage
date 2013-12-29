@@ -15,7 +15,8 @@ BookManage::Application.routes.draw do
 
   match '/admin/', to: 'admin#index', as: :admin
   match '/admin/status/', to: 'admin#status', as: :admin_status
-  match '/admin/transfer/', to: 'admin#transfer', as: :admin_transfer
+  match '/admin/transfer/', to: 'admin#find_book', as: :admin_find_book
+  match '/admin/transfer/:id', to: 'admin#transfer', as: :admin_transfer
 
   resources :books, only: [:index, :show] do
     member do

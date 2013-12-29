@@ -1,0 +1,45 @@
+%nav.full-width{class: "navbar navbar-default", roll: "navigation"}
+  %div{class: "collapse navbar-collapse"}
+    %ul{class: "nav navbar-nav"}
+      %li
+        = link_to "Status", admin_status_path
+      %li.active
+        = link_to "Transfer", admin_find_book_path
+    %ul{class: "nav navbar-nav navbar-right"}
+      - if current_reader
+        %li
+          = link_to "profile", reader_path(current_reader), id: "profile"
+        %li
+          = link_to "logout", logout_user_path(current_reader), id: "logout"
+      - else
+        %li
+          = link_to "login", User.login_url
+%header 
+  %h1 Admin Page
+
+%div.card{class: "full-width"}
+  %form.form-inline{role: "form", :method => :get, :action => admin_find_book_path}
+    %div.form-group{class: "col-md-2"}
+      %select.form-control{:name => :type, :id => "search_type"}
+        - @all_field.each do |field|
+          %option= field 
+    %div.form-group{class: "col-md-8"}
+      %input{class: "form-control", type: "text", :name => :keywords, :id => "search_keywords"}
+    %button{class: "btn btn-primary", :id => "search_button"} Search
+
+%div.card{class: "full-width"}
+  %table.table
+    %tr
+      %th Title
+      %th Author
+      %th ISBN
+    - @books.each do |book|
+      %tr
+        %td 
+          = book.title
+        %td 
+          = book.author
+        %td 
+          = book.ISBN
+        %td
+          = link_to 'transfer', admin_transfer_path(id: book.id)
