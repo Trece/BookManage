@@ -7,4 +7,8 @@ class BorrowRecord < ActiveRecord::Base
     t = created_at
     t + (14 * 24 * 3600)
   end
+  
+  def notify_time
+    return_time - (2 * 24 * 3600)
+  end
 end
