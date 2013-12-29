@@ -14,11 +14,11 @@ class AdminController < ApplicationController
   def find_book
     @page = (if params[:page] then params[:page] else 1 end).to_i
     @all_field = Book.all_fields
-    if params[:type] && params[:keywords] then
-      type = params[:type]
-      keywords = params[:keywords]
-      type ||= session[:type]
-      keywords ||= session[:keywords]
+    type = params[:type]
+    keywords = params[:keywords]
+    type ||= session[:type]
+    keywords ||= session[:keywords]
+    if type && :keywords then
       @books = Book.search(type, keywords)
       session[:type] = type
       session[:keywords] = keywords
