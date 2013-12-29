@@ -14,6 +14,8 @@ BookManage::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   match '/admin/', to: 'admin#index', as: :admin
+  match '/admin/status/', to: 'admin#status', as: :admin_status
+  match '/admin/transfer/', to: 'admin#transfer', as: :admin_transfer
 
   resources :books, only: [:index, :show] do
     member do

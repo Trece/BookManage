@@ -18,6 +18,8 @@ class ReadersController < ApplicationController
   # GET /readers/1.json
   def show
     @reader = current_reader
+    @reserved_books = @reader.reserved_books
+    @borrowed_books = @reader.borrowed_books
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @reader }

@@ -19,6 +19,8 @@
 
 -if flash[:notice]
   %div.full-width{class: "card danger"}= flash[:notice]
+-if flash[:warning]
+  %div.full-width{class: "card warning"}= flash[:warning]
 
 %div.card{class: "full-width"}
   %table.table{class: "table-bordered"}
@@ -37,14 +39,21 @@
         %strong
           Phone
       %td= @reader.phone
-  - if @reader.borrowed_books == nil
+  - if @reader.borrowed_books
     %strong borrowed books
-    %table
+    %table.table
       - @reader.borrowed_books.each do |book|
         %tr
           %td= book.title
           %td= link_to 'return', return_book_path(book, reader_name: @reader.name), remote: true
-  
+
+  - if @reader.reserved_books
+    %strong reserved books
+    %table.table
+      - @reader.reserved_books.each do |book|
+        %tr
+          %td= book.title
+
   = link_to 'Edit', edit_reader_path(@reader), id: "edit"
   %br
   = link_to 'Back', home_path, id: "back"
