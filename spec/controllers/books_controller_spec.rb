@@ -51,10 +51,10 @@ describe BooksController do
       Reader.stub(:find_by_name).and_return(reader)
       book.stub(:borrowed_by)
       post :borrow_book, id: book.id, reader_name: reader.name
-      flash[:notice].should == "No more book left"
+      flash[:notice].should == "Failed, no more book left"
     end
   end
-  
+
   describe "return book" do
     it "should call the instance method return" do
       book = FactoryGirl.build(:book, remain_num: 0)

@@ -1,3 +1,6 @@
+require 'rufus-scheduler'
+require 'notify_mailer'
+
 class ReserveRecord < ActiveRecord::Base
   attr_accessible :book, :reader
   belongs_to :reader

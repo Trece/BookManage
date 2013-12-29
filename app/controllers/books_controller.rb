@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-require 'rufus-scheduler'
-require 'notify_mailer'
 
 class BooksController < ApplicationController
 
@@ -61,12 +59,9 @@ class BooksController < ApplicationController
         flash[:notice] = "Borrowed successfully"
 
         # set email reminder
-        scheduler = Rufus::Scheduler.new
-        book_record = book.borrow_records.find_by_reader_id(reader.id)
-        notify_time = book_record.notify_time
-
-        scheduler.at notify_time do
-          NotifyMailer.ask_for_return_for(book_record).deliver
+        borrow_record = book.borrow_records.find_by_reader_id(reader.id)
+        if borrow_record != nil
+          borrow_record.set_return_reminder
         end
       end
     else
