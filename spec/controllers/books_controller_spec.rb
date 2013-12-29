@@ -36,22 +36,31 @@ describe BooksController do
   end
 
   describe "borrow book" do
+    before :each do
+      @book = FactoryGirl.build(:book, remain_num: 2)
+      @reader = FactoryGirl.build(:reader, name: "Tom")
+      Book.stub(:find).and_return(@book)
+      Reader.stub(:find_by_jobid).and_return(@reader)
+    end
     it "should call the borrow method" do
-      book = FactoryGirl.build(:book, remain_num: 2)
-      reader = FactoryGirl.build(:reader, name: "Tom")
-      Book.stub(:find).and_return(book)
-      Reader.stub(:find_by_jobid).and_return(reader)
-      book.should_receive(:borrowed_by).with(reader)
-      post :borrow_book, id: book.id, reader_jobid: 2
+      @book.should_receive(:borrowed_by).with(@reader)
+      post :borrow_book, id: @book.id, reader_jobid: 2
     end
     it "should give notice if no book is left" do
-      book = FactoryGirl.build(:book, remain_num: 0)
-      reader = FactoryGirl.build(:reader, name: "Tom")
-      Book.stub(:find).and_return(book)
-      Reader.stub(:find_by_jobid).and_return(reader)
-      book.stub(:borrowed_by)
-      post :borrow_book, id: book.id, reader_jobid: 2
+      @book.remain_num = 0
+      @book.stub(:borrowed_by)
+      post :borrow_book, id: @book.id, reader_jobid: 2
       flash[:error].should == "Failed, no more book left or has been reserved"
+    end
+    it "should give success notice" do
+      @book.stub(:borrowed_by).and_return(true)
+      post :borrow_book, id: @book.id, reader_jobid: 2
+      flash[:notice].should == "Borrowed successfully"
+    end
+    it "should give error when invalid id inputed" do
+      Reader.stub(:find_by_jobid).and_raise(NoMethodError)
+      post :borrow_book, id: @book.id, reader_jobid: 2
+      flash[:error].should == "Invalid ID"
     end
   end
 
@@ -63,6 +72,19 @@ describe BooksController do
       Reader.stub(:find_by_jobid).and_return(reader)
       book.should_receive(:returned_by).with(reader)
       post :return_book, id: book.id, reader_jobid: 2
+    end
+    it "should give the notice when success" do
+      book = FactoryGirl.build(:book, remain_num: 0)
+      reader = FactoryGirl.build(:reader, name: "Tom")
+      mail = mock('fake')
+      Book.stub(:find).and_return(book)
+      Reader.stub(:find_by_jobid).and_return(reader)
+      book.stub(:reserve_records).and_return(["haha"])
+      NotifyMailer.stub(:fetch_reserved_books).and_return(mail)
+      mail.stub(:deliver)
+      book.stub(:returned_by).and_return(true)
+      post :return_book, id: book.id, reader_jobid: 2
+      flash[:notice].should == "Return successfully"
     end
   end
 

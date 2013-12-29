@@ -40,7 +40,7 @@ Scenario: someone borrows a book with enough left
 
 Scenario: someone borrows a book without enough left
   Given I am on the transfer page for "My Life"
-  When I fill in "borrow_reader" with "2010000000"
+  When I fill in "borrow_reader" with "2010010002"
   And I press "borrow_button"
   Then I should see "0/1"
   And I should not see "2010010002"

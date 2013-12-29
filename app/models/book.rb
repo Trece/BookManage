@@ -25,12 +25,11 @@ class Book < ActiveRecord::Base
 
   def borrowed_by(reader)
     if has_remain || is_in_reserve_list(reader) then
-      update_attribute(:remain_num, remain_num - 1)
-      borrowed_readers << reader
-
       if is_in_reserve_list(reader)
         reserved_readers.delete(reader)
       end
+      update_attribute(:remain_num, remain_num - 1)
+      borrowed_readers << reader
     end
   end
 
