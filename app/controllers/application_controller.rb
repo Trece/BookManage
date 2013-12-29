@@ -49,4 +49,8 @@ class ApplicationController < ActionController::Base
       @admin_flag = false
     end
   end
+
+  helper_method :current_user
+  helper_method :current_reader
+
 end

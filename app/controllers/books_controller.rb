@@ -16,7 +16,7 @@ class BooksController < ApplicationController
     else
       @books = flash[:search_result]
     end
-
+    
     @all_field = Book.all_fields
 
     respond_to do |format|

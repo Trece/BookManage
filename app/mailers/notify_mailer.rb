@@ -8,7 +8,7 @@ class NotifyMailer < ActionMailer::Base
     mail(to: "winmad.wlf@gmail.com", subject: "Please return the book that you borrow")
   end
 
-  def test_mail()
-    mail(to: "treamug@gmail.com, subject: "TEST")
+  def test_mail
+    mail(to: "treamug@gmail.com", subject: "TEST")
   end
 end
