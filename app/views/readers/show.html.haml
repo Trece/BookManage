@@ -44,20 +44,21 @@
         %strong
           ID
       %td= @reader.user.jobid
-  - if @reader.borrowed_books
+  - unless @reader.borrowed_books.empty?
     %strong borrowed books
     %table.table
       - @reader.borrowed_books.each do |book|
         %tr
           %td= book.title
-          %td= link_to 'return', return_book_path(book, reader_name: @reader.name), remote: true
 
-  - if @reader.reserved_books
+
+  - unless @reader.reserved_books.empty?
     %strong reserved books
     %table.table
       - @reader.reserved_books.each do |book|
         %tr
           %td= book.title
+          %td= link_to "unreserve", unreserve_book_path(book)
 
   = link_to 'Edit', edit_reader_path(@reader), id: "edit"
   %br

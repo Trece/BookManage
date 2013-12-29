@@ -51,7 +51,7 @@ describe BooksController do
       Reader.stub(:find_by_jobid).and_return(reader)
       book.stub(:borrowed_by)
       post :borrow_book, id: book.id, reader_jobid: 2
-      flash[:notice].should == "Failed, no more book left"
+      flash[:error].should == "Failed, no more book left or has been reserved"
     end
   end
 

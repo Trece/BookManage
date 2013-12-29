@@ -55,13 +55,12 @@ class BooksController < ApplicationController
       redirect_to admin_transfer_path(id: book.id)
       return
     end
-    if book.remain_num > 0
-      if reader == nil then
-        flash[:notice] = "Failed, not sign up yet"
-      elsif !book.borrow_records.find_by_reader_id(reader.id).nil?
-        flash[:notice] = "Failed, you have borrowed this book"
-      else
-        book.borrowed_by reader
+    if reader == nil then
+      flash[:error] = "Failed, not sign up yet"
+    elsif !book.borrow_records.find_by_reader_id(reader.id).nil?
+      flash[:error] = "Failed, you have borrowed this book"
+    else
+      if book.borrowed_by reader
         flash[:notice] = "Borrowed successfully"
 
         # set email reminder
@@ -69,9 +68,9 @@ class BooksController < ApplicationController
         if borrow_record != nil
           borrow_record.set_return_reminder
         end
+      else 
+        flash[:error] = "Failed, no more book left or has been reserved"
       end
-    else
-      flash[:notice] = "Failed, no more book left"
     end
     respond_to do |format|
       format.json { head :no_content}
