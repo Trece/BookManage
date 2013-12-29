@@ -56,7 +56,7 @@
         %div.form-group
           %input{class: "form-control", type: "text", name: "reader_name", placeholder:"Your name", id: "borrow_reader"}
         %button{class: "btn btn-primary", id: "borrow_button"} 借出
-      - unless current_readers.empty?
+      - unless @readers.empty?
         %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
           %input{name: "authenticity_token", type: "hidden", value: "#{form_authenticity_token}"}
           %div.form-group
