@@ -141,4 +141,8 @@ class BooksController < ApplicationController
     @user_flag && (!@admin_flag) && (@book.reserved_readers.include? current_reader)
   end
 
+  def record_per_page
+    10
+  end
+
 end
