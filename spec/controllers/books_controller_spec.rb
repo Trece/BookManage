@@ -40,17 +40,17 @@ describe BooksController do
       book = FactoryGirl.build(:book, remain_num: 2)
       reader = FactoryGirl.build(:reader, name: "Tom")
       Book.stub(:find).and_return(book)
-      Reader.stub(:find_by_name).and_return(reader)
+      Reader.stub(:find_by_jobid).and_return(reader)
       book.should_receive(:borrowed_by).with(reader)
-      post :borrow_book, id: book.id, reader_name: reader.name
+      post :borrow_book, id: book.id, reader_jobid: 2
     end
     it "should give notice if no book is left" do
       book = FactoryGirl.build(:book, remain_num: 0)
       reader = FactoryGirl.build(:reader, name: "Tom")
       Book.stub(:find).and_return(book)
-      Reader.stub(:find_by_name).and_return(reader)
+      Reader.stub(:find_by_jobid).and_return(reader)
       book.stub(:borrowed_by)
-      post :borrow_book, id: book.id, reader_name: reader.name
+      post :borrow_book, id: book.id, reader_jobid: 2
       flash[:notice].should == "Failed, no more book left"
     end
   end
@@ -60,9 +60,9 @@ describe BooksController do
       book = FactoryGirl.build(:book, remain_num: 0)
       reader = FactoryGirl.build(:reader, name: "Tom")
       Book.stub(:find).and_return(book)
-      Reader.stub(:find_by_name).and_return(reader)
+      Reader.stub(:find_by_jobid).and_return(reader)
       book.should_receive(:returned_by).with(reader)
-      post :return_book, id: book.id, reader_name: reader.name
+      post :return_book, id: book.id, reader_jobid: 2
     end
   end
 
@@ -80,7 +80,7 @@ describe BooksController do
     it "should warn if book have remains" do
       @book.stub(:reserved_by)
       post :reserve_book, id: @book.id
-      flash[:notice].should == "Failed, there's still books left"
+      flash[:error].should == "Failed, there's still books left"
     end
   end
 
@@ -98,7 +98,7 @@ describe BooksController do
     it "should warn if he hasn't reserve the book" do
       @book.stub(:unreserved_by).and_return(nil)
       post :unreserve_book, id: @book.id
-      flash[:notice].should == "Failed, you didn't reserve it"
+      flash[:error].should == "Failed, you didn't reserve it"
     end
   end
 end

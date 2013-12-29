@@ -31,24 +31,24 @@ Background: books and readers should be added to the database
   And I login as admin
   
 Scenario: someone borrows a book with enough left
-  Given I am on the details page for "Moonlight"
-  When I fill in "borrow_reader" with "Tim"
+  Given I am on the transfer page for "Moonlight"
+  When I fill in "borrow_reader" with "2010000000"
   And I press "borrow_button"
   Then I should see "0/2"
-  And I should see "Tim"
+  And I should see "2010000000"
   And I should see "Borrowed successfully"
 
 Scenario: someone borrows a book without enough left
-  Given I am on the details page for "My Life"
-  When I fill in "borrow_reader" with "Tom"
+  Given I am on the transfer page for "My Life"
+  When I fill in "borrow_reader" with "2010000000"
   And I press "borrow_button"
   Then I should see "0/1"
-  And I should not see "Tom"
-  And I should see "No more book left"
+  And I should not see "2010010002"
+  And I should see "no more book left"
 
 Scenario: someone returns a book
-  Given I am on the details page for "Moonlight"
-  When I select "Tom" from "return_reader"
+  Given I am on the transfer page for "Moonlight"
+  When I select "2010010002" from "return_reader"
   And I press "return_button"
   Then I should see "2/2"
   And I should see "Return successfully"

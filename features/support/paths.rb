@@ -27,6 +27,8 @@ module NavigationHelpers
       
     when /^the details page for reader "([^"]*)"/
       reader_path(Reader.find_by_name($1))
+    when /^the transfer page for "([^"]*)"/
+      admin_transfer_path(Book.find_by_title($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

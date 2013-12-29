@@ -1,7 +1,8 @@
 Given /these readers exist/ do |reader_table|
   reader_table.hashes.each do |reader|
-    reader["user"] = User.find_by_name(reader["name"])
-    Reader.create! reader
+    new_reader = Reader.create! reader
+    new_reader.user = User.find_by_name(reader["name"])
+    new_reader.save
   end
 end
 
