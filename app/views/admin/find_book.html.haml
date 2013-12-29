@@ -43,3 +43,8 @@
           = book.ISBN
         %td
           = link_to 'transfer', admin_transfer_path(id: book.id)
+
+  - if @page <= @page_limit 
+    = link_to "next page", admin_find_book_path(page: @page + 1)
+  - if @page != 1
+    = link_to "previous page", admin_find_book_path(page: @page - 1)
