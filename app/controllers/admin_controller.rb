@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  before_filter :auth_admin
+
   def index
     redirect_to admin_status_path
   end
