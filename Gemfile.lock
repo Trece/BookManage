@@ -257,6 +257,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   launchy
+  mail
   metric_fu
   omniauth
   pg

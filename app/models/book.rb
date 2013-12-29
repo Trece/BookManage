@@ -11,9 +11,9 @@ class Book < ActiveRecord::Base
   end
 
   def has_remain
-    remain_num > reesrve_records.count
+    remain_num > reserve_records.count
   end
-  
+
   def borrowed_by(reader)
     if has_remain then
       update_attribute(:remain_num, remain_num - 1)

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'mail'
+gem 'rufus-scheduler'
 gem 'haml'
 gem 'rails', '3.2.13'
 gem 'omniauth'

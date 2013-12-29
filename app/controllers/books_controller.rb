@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+require 'rufus-scheduler'
+require 'notify_mailer'
+
 class BooksController < ApplicationController
 
   protect_from_forgery
@@ -50,10 +53,19 @@ class BooksController < ApplicationController
     reader = Reader.find_by_name(params[:reader_name])
     if book.remain_num > 0
       if reader == nil then
-        flash[:notice] = "Not sign up yet"
+        flash[:notice] = "Error: Not sign up yet"
+      elsif !book.borrow_records.find_by_reader_id(reader.id).nil?
+        flash[:notice] = "Error: You have borrowed this book"
       else
         book.borrowed_by reader
         flash[:notice] = "Borrowed successfully"
+
+        # set email reminder
+        scheduler = Rufus::Scheduler.new
+        book_record = book.borrow_records.find_by_reader_id(reader.id)
+        scheduler.in '120s' do
+          NotifyMailer.ask_for_return_for(book_record).deliver
+        end
       end
     else
       flash[:notice] = "No more book left"
@@ -85,7 +97,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Reserved successfully"
     else
       flash[:notice] = "Failed, there's still books left"
-    end 
+    end
     respond_to do |format|
       format.json {head :no_content}
       format.html { redirect_to book_path(book) }
@@ -107,7 +119,7 @@ class BooksController < ApplicationController
   end
 
   private
-  
+
   def can_reserve
     @user_flag && (!@admin_flag) && @book.remain_num == 0 && !(@book.reserved_readers.include? current_reader)
   end
