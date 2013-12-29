@@ -14,10 +14,23 @@ class Book < ActiveRecord::Base
     remain_num > reserve_records.count
   end
 
+  def is_in_reserve_list(reader)
+    if self.reserve_records != nil
+        if reserve_records.find_by_reader_id(reader.id) != nil
+          return true
+        end
+    end
+    return false
+  end
+
   def borrowed_by(reader)
-    if has_remain then
+    if has_remain || is_in_reserve_list(reader) then
       update_attribute(:remain_num, remain_num - 1)
       borrowed_readers << reader
+
+      if is_in_reserve_list(reader)
+        reserved_readers.delete(reader)
+      end
     end
   end
 
