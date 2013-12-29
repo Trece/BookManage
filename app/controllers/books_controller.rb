@@ -39,7 +39,6 @@ class BooksController < ApplicationController
 
   # POST /books/search
   def search
-    debugger
     type = params[:type]
     keywords = params[:keywords]
     search_result = Book.search(type, keywords)
