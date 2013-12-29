@@ -3,8 +3,8 @@
     %ul{class: "nav navbar-nav"}
       %li
         = link_to "Status", admin_status_path
-      %li.active
-        = link_to "Transfer", admin_transfer_path
+      %li
+        = link_to "Transfer", admin_find_book_path
     %ul{class: "nav navbar-nav navbar-right"}
       - if current_reader
         %li
@@ -14,15 +14,54 @@
       - else
         %li
           = link_to "login", User.login_url
-%header 
-  %h1 Admin Page
+%header
+  %h1 Details of #{@book.title}
 
-%div.card{class: "full-width"}
-  %form.form-inline{role: "form", :method => :post, :action => search_books_path}
-    %div.form-group{class: "col-md-2"}
-      %select.form-control{:name => :type, :id => "search_type"}
-        - @all_field.each do |field|
-          %option= field 
-    %div.form-group{class: "col-md-8"}
-      %input{class: "form-control", type: "text", :name => :keywords, :id => "search_keywords"}
-    %button{class: "btn btn-primary", :id => "search_button"} Search
+-if flash[:notice]
+  %div.card{class: "full-width alert-success"}= flash[:notice]
+-if flash[:error]
+  %div.card{class: "full-width alert-danger"}= flash[:error]
+
+%div.card{class: "full-width"}              
+  %h3= @book.title                           
+  %div.row
+    %div.col-md-2
+      %strong
+        ISBN
+    %div.col-md-10= @book.ISBN
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        author                              
+    %div.col-md-10= @book.author             
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        description                         
+    %div.col-md-10= @book.description*20     
+  %br                                       
+  %div.row                                  
+    %div.col-md-2                           
+      %strong                               
+        Remain/Total                        
+    %div.col-md-10                          
+      #{@book.remain_num}/#{@book.total_num}  
+  - if @reserved_time != 0
+    %div.row
+      %div.col-md-12
+        reserved by #{@reserved_time} readers
+  = link_to "返回", admin_find_book_path
+  %br
+    %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
+      %input{name: "authenticity_token", type: "hidden", value: "#{form_authenticity_token}"}
+      %div.form-group
+        %input{class: "form-control", type: "text", name: "reader_jobid", placeholder:"id number", id: "borrow_reader"}
+      %button{class: "btn btn-primary", id: "borrow_button"} 借出
+    - unless @readers.empty?
+      %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
+        %input{name: "authenticity_token", type: "hidden", value: "#{form_authenticity_token}"}
+        %div.form-group
+          %select.form-control{name: "reader_jobid", id: "return_reader"}
+            - @readers.each do |reader|
+              %option= reader.user.jobid
+        %button{class: "btn btn-primary", id: "return_button"} 归还

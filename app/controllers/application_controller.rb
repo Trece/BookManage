@@ -4,12 +4,16 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    unless @user then
-      if session[:user_id] then
-        @user = User.find(session[:user_id])
+    begin
+      unless @user then
+        if session[:user_id] then
+          @user = User.find(session[:user_id])
+        end
       end
+      @user
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
-    @user
   end
 
   def current_reader
