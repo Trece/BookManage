@@ -7,4 +7,8 @@ class NotifyMailer < ActionMailer::Base
     @record = b_record
     mail(to: @reader.email, subject: "Please return the book that you borrow")
   end
+
+  def test_mail()
+    mail(to: "treamug@gmail.com, subject: "TEST")
+  end
 end
