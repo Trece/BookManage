@@ -50,7 +50,13 @@ class BooksController < ApplicationController
 
   def borrow_book
     book = Book.find(params[:id])
-    reader = Reader.find_by_name(params[:reader_name])
+    begin
+      reader = Reader.find_by_jobid(params[:reader_jobid])
+    rescue NoMethodError
+      flash[:error] = "Invalid ID"
+      redirect_to admin_transfer_path(id: book.id)
+      return
+    end
     if book.remain_num > 0
       if reader == nil then
         flash[:notice] = "Failed, not sign up yet"
@@ -74,28 +80,31 @@ class BooksController < ApplicationController
     end
     respond_to do |format|
       format.json { head :no_content}
-      format.html { redirect_to book_path(book) }
+      format.html { redirect_to admin_transfer_path(id: book.id) }
     end
   end
 
   def return_book
     book = Book.find(params[:id])
-    reader = Reader.find_by_name(params[:reader_name])
-
+    begin
+      reader = Reader.find_by_jobid(params[:reader_jobid])
+    rescue NoMethodError
+      flash[:error] = "Invalid ID"
+      redirect_to admin_transfer_path(id: book.id)
+    end
     if book.returned_by reader
       flash[:notice] = "Return successfully"
-
       # send notify email so that the reader can fetch reserved books
-      if !book.reserve_records.nil?
+      if !book.reserve_records.empty?
         reserve_record = book.reserve_records[0]
         NotifyMailer.fetch_reserved_books(reserve_record).deliver
       end
     else
-      flash[:notice] = "You didn't borrowed this book"
+      flash[:error] = "You didn't borrowed this book"
     end
     respond_to do |format|
       format.json {head :no_content}
-      format.html { redirect_to book_path(book) }
+      format.html { redirect_to admin_transfer_path(id: book.id) }
     end
   end
 
@@ -105,7 +114,7 @@ class BooksController < ApplicationController
     if book.reserved_by reader then
       flash[:notice] = "Reserved successfully"
     else
-      flash[:notice] = "Failed, there's still books left"
+      flash[:error] = "Failed, there's still books left"
     end
     respond_to do |format|
       format.json {head :no_content}
@@ -119,7 +128,7 @@ class BooksController < ApplicationController
     if book.unreserved_by reader then
       flash[:notice] = "Unreserved successfully"
     else
-      flash[:notice] = "Failed, you didn't reserve it"
+      flash[:error] = "Failed, you didn't reserve it"
     end
     respond_to do |format|
       format.json {head :no_content}

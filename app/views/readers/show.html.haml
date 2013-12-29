@@ -39,6 +39,11 @@
         %strong
           Phone
       %td= @reader.phone
+    %tr
+      %td
+        %strong
+          ID
+      %td= @reader.user.jobid
   - if @reader.borrowed_books
     %strong borrowed books
     %table.table

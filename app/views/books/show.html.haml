@@ -17,8 +17,10 @@
 %header
   %h1 Details of #{@book.title}
 
--if notice
-  %div.card{class: "full-width danger"}= notice
+-if flash[:notice]
+  %div.card{class: "full-width alert-success"}= flash[:notice]
+-if flash[:error]
+  %div.card{class: "full-width alert-danger"}= flash[:error]
 
 %div.card{class: "full-width"}              
   %h3= @book.title                           
@@ -48,7 +50,6 @@
     %div.row
       %div.col-md-12
         reserved by #{@reserved_time} readers
-  = link_to "返回", books_path
   %br
     - if @admin_flag
       %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}

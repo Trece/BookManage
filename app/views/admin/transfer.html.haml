@@ -2,9 +2,9 @@
   %div{class: "collapse navbar-collapse"}
     %ul{class: "nav navbar-nav"}
       %li
-        = link_to "Home", home_path
+        = link_to "Status", admin_status_path
       %li
-        = link_to "All Books", books_path
+        = link_to "Transfer", admin_find_book_path
     %ul{class: "nav navbar-nav navbar-right"}
       - if current_reader
         %li
@@ -17,8 +17,10 @@
 %header
   %h1 Details of #{@book.title}
 
--if notice
-  %div.card{class: "full-width danger"}= notice
+-if flash[:notice]
+  %div.card{class: "full-width alert-success"}= flash[:notice]
+-if flash[:error]
+  %div.card{class: "full-width alert-danger"}= flash[:error]
 
 %div.card{class: "full-width"}              
   %h3= @book.title                           
@@ -48,7 +50,7 @@
     %div.row
       %div.col-md-12
         reserved by #{@reserved_time} readers
-  = link_to "返回", books_path
+  = link_to "返回", admin_find_book_path
   %br
     %form.form-inline{role: "form", method: :post, action: borrow_book_path(@book)}
       %input{name: "authenticity_token", type: "hidden", value: "#{form_authenticity_token}"}
@@ -59,7 +61,7 @@
       %form.form-inline{role: "form", method: :post, action: return_book_path(@book)}
         %input{name: "authenticity_token", type: "hidden", value: "#{form_authenticity_token}"}
         %div.form-group
-          %select.form-control{name: "reader_name", id: "return_reader"}
+          %select.form-control{name: "reader_jobid", id: "return_reader"}
             - @readers.each do |reader|
-              %option= reader.name
+              %option= reader.user.jobid
         %button{class: "btn btn-primary", id: "return_button"} 归还
