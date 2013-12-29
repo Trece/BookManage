@@ -39,6 +39,7 @@ class BooksController < ApplicationController
 
   # POST /books/search
   def search
+    debugger
     type = params[:type]
     keywords = params[:keywords]
     search_result = Book.search(type, keywords)
@@ -68,7 +69,7 @@ class BooksController < ApplicationController
         if borrow_record != nil
           borrow_record.set_return_reminder
         end
-      else 
+      else
         flash[:error] = "Failed, no more book left or has been reserved"
       end
     end
