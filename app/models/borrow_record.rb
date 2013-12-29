@@ -12,8 +12,7 @@ class BorrowRecord < ActiveRecord::Base
   end
   
   def notify_time
-  	created_at
-    #return_time - (2 * 24 * 3600)
+    return_time - (2 * 24 * 3600)
   end
   
   def set_return_reminder
