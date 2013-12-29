@@ -16,7 +16,7 @@ class BooksController < ApplicationController
     else
       @books = flash[:search_result]
     end
-    
+
     @all_field = Book.all_fields
 
     respond_to do |format|
@@ -53,9 +53,9 @@ class BooksController < ApplicationController
     reader = Reader.find_by_name(params[:reader_name])
     if book.remain_num > 0
       if reader == nil then
-        flash[:notice] = "Error: Not sign up yet"
+        flash[:notice] = "Failed, not sign up yet"
       elsif !book.borrow_records.find_by_reader_id(reader.id).nil?
-        flash[:notice] = "Error: You have borrowed this book"
+        flash[:notice] = "Failed, you have borrowed this book"
       else
         book.borrowed_by reader
         flash[:notice] = "Borrowed successfully"
@@ -63,12 +63,14 @@ class BooksController < ApplicationController
         # set email reminder
         scheduler = Rufus::Scheduler.new
         book_record = book.borrow_records.find_by_reader_id(reader.id)
-        scheduler.in '120s' do
+        notify_time = book_record.notify_time
+
+        scheduler.at notify_time do
           NotifyMailer.ask_for_return_for(book_record).deliver
         end
       end
     else
-      flash[:notice] = "No more book left"
+      flash[:notice] = "Failed, no more book left"
     end
     respond_to do |format|
       format.json { head :no_content}
@@ -79,8 +81,15 @@ class BooksController < ApplicationController
   def return_book
     book = Book.find(params[:id])
     reader = Reader.find_by_name(params[:reader_name])
+
     if book.returned_by reader
       flash[:notice] = "Return successfully"
+
+      # send notify email so that the reader can fetch reserved books
+      if !book.reserve_records.nil?
+        reserve_record = book.reserve_records[0]
+        NotifyMailer.fetch_reserved_books(reserve_record).deliver
+      end
     else
       flash[:notice] = "You didn't borrowed this book"
     end
