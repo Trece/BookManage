@@ -15,7 +15,5 @@ class NotifyMailer < ActionMailer::Base
     mail(to: @reader.email, subject: "Please fetch your reserved books")
   end
 
-  def test_mail
-    mail(to: "treamug@gmail.com", subject: "TEST")
-  end
+
 end
