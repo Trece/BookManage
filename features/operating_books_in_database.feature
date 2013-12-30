@@ -6,7 +6,7 @@ Feature: operating books in database
 
 Background: books and readers should be added to the database
 
-  Given these books exist:
+  Given these books exist`
   |title     |author |total_num |remain_num |description |
   |Sunshine  |Bob    |3         |3          |Wangwang    |
   |Moonlight |Alice  |2         |2          |Miaomiao    |
